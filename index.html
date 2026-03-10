@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Muckrakers: Investigative Journalism Activity</title>
+<title>The Muckrakers: Four-Day Investigative Journalism Unit</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Special+Elite&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -216,6 +216,23 @@
   /* ---- DAY STAMPS ---- */
   .day1-stamp { color: var(--gold); border-color: var(--gold); }
   .day2-stamp { color: var(--green); border-color: var(--green); }
+  .day3-stamp { color: #4a7ab0; border-color: #4a7ab0; }
+  .day4-stamp { color: #7a4ab0; border-color: #7a4ab0; }
+
+  /* ---- CANVA CHECKLIST ---- */
+  .canva-checklist { list-style: none; margin: 16px 0; }
+  .canva-checklist li { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px dashed var(--light-gray); font-size: 0.9rem; line-height: 1.5; }
+  .canva-checklist li:last-child { border: none; }
+  .canva-checklist .ck-num { font-family: 'Special Elite', cursive; font-size: 11px; color: var(--cream); background: #4a7ab0; padding: 2px 7px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ---- REFERENCE CARD (Day 3→4 carry-over) ---- */
+  .ref-card { background: #1a1208; color: #d4c9aa; padding: 16px 20px; margin: 12px 0; border-left: 4px solid var(--gold); }
+  .ref-card .ref-label { font-family: 'Special Elite', cursive; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; display: block; }
+  .ref-card p { font-size: 0.9rem; line-height: 1.65; color: #d4c9aa; margin: 0; }
+
+  /* Day banners day3/day4 */
+  .day-banner.day3 { color: #4a7ab0; border-color: #2a4a70; }
+  .day-banner.day4 { color: #9a7ad0; border-color: #4a2a80; }
 
   /* ---- DAY SEPARATOR IN STEP NAV ---- */
   .step-day-sep {
@@ -327,13 +344,25 @@
 
       <!-- RUBRIC -->
       <div class="td-section">
-        <div class="td-section-head"><span>Grading Rubric</span><span>25 pts total</span></div>
+        <div class="td-section-head"><span>Grading Rubric</span><span>48 pts total</span></div>
         <div class="td-section-body">
-          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text"><strong>Profiles:</strong> Identifies ≥2 similarities; picks most courageous with clear reasoning</div><div class="rubric-pts">5 pts</div></div>
-          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text"><strong>Primary Sources:</strong> Analyzes all three; identifies a shared persuasion technique</div><div class="rubric-pts">6 pts</div></div>
-          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text"><strong>Impact Ratings:</strong> All three rated; justification uses evidence; addresses who benefited</div><div class="rubric-pts">5 pts</div></div>
-          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text"><strong>Muckraker Assignment:</strong> Clear topic + compelling headline; identifies harm and power dynamics</div><div class="rubric-pts">5 pts</div></div>
-          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text"><strong>Final Argument:</strong> Addresses "why muckraking matters" with ≥2 specific activity examples</div><div class="rubric-pts">4 pts</div></div>
+          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text" style="color:var(--gold);font-weight:600;">DAY 1 — Research &amp; Analysis</div><div class="rubric-pts"></div></div>
+          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text"><strong>Profiles:</strong> Identifies ≥2 similarities; picks most courageous with clear reasoning</div><div class="rubric-pts">4 pts</div></div>
+          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text"><strong>Primary Sources:</strong> Analyzes all three; identifies a shared persuasion technique</div><div class="rubric-pts">5 pts</div></div>
+          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text"><strong>Impact Ratings:</strong> All three rated; written justification uses specific evidence</div><div class="rubric-pts">3 pts</div></div>
+          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text"><strong>Day 1 Bridge:</strong> Connects ratings to a theory of how change happens; goes beyond description</div><div class="rubric-pts">3 pts</div></div>
+          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text" style="color:var(--green);font-weight:600;margin-top:6px;">DAY 2 — Investigation Planning</div><div class="rubric-pts"></div></div>
+          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text"><strong>Muckraker Inspiration:</strong> Names a specific method from Day 1 and explains how to apply it</div><div class="rubric-pts">2 pts</div></div>
+          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text"><strong>Blueprint:</strong> Clear topic + compelling headline; identifies harm, evidence plan, and 3 interview sources</div><div class="rubric-pts">4 pts</div></div>
+          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text"><strong>Story Outline:</strong> All three parts (hook, evidence, call to action) are specific and planned</div><div class="rubric-pts">3 pts</div></div>
+          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text" style="color:#4a7ab0;font-weight:600;margin-top:6px;">DAY 3 — Writing the Article</div><div class="rubric-pts"></div></div>
+          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text"><strong>Lede:</strong> Opens with a vivid scene, person, or statistic; does not summarize — hooks the reader</div><div class="rubric-pts">4 pts</div></div>
+          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text"><strong>Body:</strong> Includes at least one fact, one person's experience, and one attributed quote; evidence-based</div><div class="rubric-pts">5 pts</div></div>
+          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text"><strong>Pull Quote + Conclusion:</strong> Pull quote is powerful and specific; conclusion demands a concrete change</div><div class="rubric-pts">3 pts</div></div>
+          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text" style="color:#7a4ab0;font-weight:600;margin-top:6px;">DAY 4 — Canva Newspaper</div><div class="rubric-pts"></div></div>
+          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text"><strong>Design Completeness:</strong> All 7 required elements present (masthead, headline, byline, text, pull quote, image, caption)</div><div class="rubric-pts">5 pts</div></div>
+          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text"><strong>Design Quality:</strong> Fonts, layout, and color reinforce the era and story; professional and readable</div><div class="rubric-pts">3 pts</div></div>
+          <div class="rubric-row"><div class="rubric-check"></div><div class="rubric-text"><strong>Final Reflection:</strong> Addresses "why muckraking matters" with ≥1 historical and ≥1 personal example</div><div class="rubric-pts">4 pts</div></div>
           <div class="rubric-row" style="background:var(--aged);margin-top:4px;"><div class="rubric-check" style="visibility:hidden;"></div><div class="rubric-text"><strong>⚠ Integrity:</strong> Deduct at teacher's discretion if flags are present</div><div class="rubric-pts">−0 to −5</div></div>
         </div>
       </div>
@@ -370,30 +399,32 @@
       <hr class="rule-thick">
       <h1>The Muckrakers</h1>
       <hr class="rule-thin">
-      <div class="subhead">A Two-Day Investigation into Investigative Journalism, 1890–1910</div>
+      <div class="subhead">A Four-Day Investigation into Investigative Journalism, 1890–1910</div>
     </div>
     <p class="lede">"The man with the muck-rake, the man who could look no way but downward… yet who was so essential to the well-being of society." — President Theodore Roosevelt, 1906</p>
     <div class="two-col">
       <div>
         <h3>Your Mission</h3>
-        <p>You've already learned about the Progressive Era — a time when Americans demanded change. Over the next two days, you'll dig deeper into the <strong>journalists</strong> who made that change possible: the Muckrakers.</p>
-        <p><strong>Day 1 (today):</strong> Research. You'll study three famous muckrakers, analyze their original sources, and rate their real-world impact.</p>
-        <p><strong>Day 2 (tomorrow):</strong> Create. Using what you learned, you'll plan and write your own muckraking investigation.</p>
+        <p>You've already learned about the Progressive Era — a time when Americans demanded change. Over the next four days, you'll dig deeper into the <strong>journalists</strong> who made that change possible: the Muckrakers.</p>
+        <p><strong>Day 1 (today):</strong> Research. Study three famous muckrakers, analyze their sources, rate their impact.</p>
+        <p><strong>Day 2:</strong> Plan. Build a complete investigation blueprint — topic, headline, evidence, story structure.</p>
+        <p><strong>Day 3:</strong> Write. Draft your full investigative article — lede, body, pull quote, and call to action.</p>
+        <p><strong>Day 4:</strong> Design. Build a newspaper front page in Canva that brings your story to life.</p>
       </div>
       <div>
         <h3>How This Works</h3>
         <ul class="checklist">
-          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Day 1:</strong> Read 3 muckraker profiles</span></li>
-          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Day 1:</strong> Analyze real primary sources</span></li>
-          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Day 1:</strong> Rate each journalist's impact</span></li>
-          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Day 2:</strong> Plan your own muckraking story</span></li>
-          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Day 2:</strong> Reflect and write your final argument</span></li>
+          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Day 1:</strong> Research 3 muckrakers and rate their impact</span></li>
+          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Day 2:</strong> Plan your investigation blueprint</span></li>
+          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Day 3:</strong> Write your investigative article</span></li>
+          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Day 4:</strong> Design your newspaper front page in Canva</span></li>
+          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Day 4:</strong> Final reflection and submission</span></li>
         </ul>
       </div>
     </div>
     <div class="callout">
       <strong>🗞️ Before You Begin:</strong>
-      Have you ever seen a news story that exposed something unfair? What happened after it was reported? Hold onto that thought — your Day 2 assignment will ask you to do exactly that kind of work yourself.
+      Have you ever seen a news story that exposed something unfair? Hold that thought — by Day 3, you'll have written your own version of exactly that story. By Day 4, it'll be on a newspaper front page.
     </div>
     <div class="two-col" style="gap:16px;margin-top:8px;">
       <div>
@@ -628,7 +659,7 @@
     <div class="error-msg" id="p3-error">Please rate all three muckrakers and write at least 5 words in each answer.</div>
     <div class="btn-group">
       <button class="btn btn-outline" onclick="goTo(2)">← Back</button>
-      <button class="btn" onclick="page3Next()">Continue to Your Investigation →</button>
+      <button class="btn" onclick="page3Next()">Wrap Up Day 1 →</button>
     </div>
   </div>
 </div>
@@ -709,7 +740,7 @@
     <div class="error-msg" id="p5-error">Please write at least 5 words about your inspiration before continuing.</div>
     <div class="btn-group">
       <div class="gate-btn-wrap" id="gate-wrap-5">
-        <button class="btn" id="gate-btn-5" onclick="page5KickoffNext()">Begin Day 2 Investigation →</button>
+        <button class="btn" id="gate-btn-5" onclick="page5KickoffNext()">Begin Day 2 Planning →</button>
         <div class="gate-overlay" id="gate-overlay-5">Review your notes first…</div>
       </div>
     </div>
@@ -721,12 +752,12 @@
   <div style="height:30px"></div>
   <div class="step-nav" id="step-nav-6"></div>
   <div class="paper">
-    <div class="stamp day2-stamp">Day 2 · Case 1</div>
-    <h2>Your Muckraking Assignment</h2>
+    <div class="stamp day2-stamp">Day 2 · Planning</div>
+    <h2>Planning Your Investigation</h2>
     <p class="lede">Yesterday you studied how Tarbell, Riis, and Sinclair worked. Now it's your turn. Every muckraker started with a problem they burned to expose — what's yours?</p>
     <div class="callout">
-      <strong>🖊️ Reporter's Brief</strong>
-      Imagine it's 1905. Your editor at <em>McClure's Magazine</em> has given you an assignment: find a problem in American society, research it, and write a story that will make the public demand change. Draw on the methods you analyzed yesterday.
+      <strong>📐 Reporter's Blueprint</strong>
+      Great muckrakers planned before they wrote. Tarbell spent <em>five years</em> gathering documents before publishing a word. Today you'll build a complete investigation blueprint — topic, angle, evidence plan, and story structure — so you're ready to write tomorrow.
     </div>
     <label for="q4-topic">What problem would you investigate? (A real issue — in 1900s America or today)</label>
     <input type="text" id="q4-topic" placeholder="e.g., child labor in factories, unsafe tenement buildings…">
@@ -742,30 +773,277 @@
     <textarea id="q4-evidence" rows="4" placeholder="To prove this story, I would need… Like Tarbell, I could… Or like Sinclair, I might…"></textarea>
     <div class="wc-row"><span class="wc-badge low" id="wc-q4-evidence">0 words</span><span class="wc-flag" id="flag-q4-evidence"></span></div>
 
-    <label for="q4-change">What specific change do you hope your story causes?</label>
-    <textarea id="q4-change" rows="3" placeholder="I hope my story leads to… Because right now…"></textarea>
+    <label for="q4-change">What specific change do you hope your story causes? What law or policy would you want changed?</label>
+    <textarea id="q4-change" rows="3" placeholder="I hope my story leads to… Specifically, Congress/the city/schools should… Because right now…"></textarea>
     <div class="wc-row"><span class="wc-badge low" id="wc-q4-change">0 words</span><span class="wc-flag" id="flag-q4-change"></span></div>
 
-    <div class="error-msg" id="p4-error">Please complete all fields with at least 5 words each.</div>
+    <div class="divider">Story Blueprint</div>
+    <p style="font-size:0.9rem;color:var(--gray);margin-bottom:0;">Muckrakers used a three-part structure: <strong>Hook</strong> (grab the reader), <strong>Evidence</strong> (prove the problem), <strong>Call to Action</strong> (demand change). Plan each part now.</p>
+    <label for="q4-outline">Outline your three-part story structure. What goes in each section? Be specific — write at least one key fact or scene for each part.</label>
+    <textarea id="q4-outline" rows="5" placeholder="HOOK: I'll open with… (a shocking statistic, a scene, a person's story)&#10;EVIDENCE: I'll prove my case by showing… Key facts include…&#10;CALL TO ACTION: I'll end by demanding… and telling readers to…"></textarea>
+    <div class="wc-row"><span class="wc-badge low" id="wc-q4-outline">0 words</span><span class="wc-flag" id="flag-q4-outline"></span></div>
+
+    <div class="divider">Source Voices</div>
+    <p style="font-size:0.9rem;color:var(--gray);margin-bottom:0;">Strong journalism includes real people. Riis photographed families. Sinclair interviewed workers. Who would <em>you</em> talk to?</p>
+    <label for="q4-interview">Who are three people you would interview for your story? What is one key question you'd ask each person?</label>
+    <textarea id="q4-interview" rows="4" placeholder="1. I would interview ___ because… My key question: ___&#10;2. I would interview ___ because… My key question: ___&#10;3. I would interview ___ because… My key question: ___"></textarea>
+    <div class="wc-row"><span class="wc-badge low" id="wc-q4-interview">0 words</span><span class="wc-flag" id="flag-q4-interview"></span></div>
+
+    <div class="error-msg" id="p6-error">Please complete all sections with at least 5 words each.</div>
     <div class="btn-group">
       <button class="btn btn-outline" onclick="goTo(5)">← Back</button>
-      <button class="btn" onclick="page6Next()">Continue to Final Reflection →</button>
+      <button class="btn" onclick="page6PlanNext()">Wrap Up Day 2 →</button>
     </div>
   </div>
 </div>
 
-<!-- PAGE 7: REFLECTION (DAY 2) -->
+
+<!-- PAGE 7: DAY 2 WRAP -->
 <div class="page" id="page-7">
   <div style="height:30px"></div>
   <div class="step-nav" id="step-nav-7"></div>
   <div class="paper">
-    <div class="stamp day2-stamp">Day 2 · Final</div>
-    <h2>The Bigger Picture</h2>
-    <p class="lede">Over two days you researched history's muckrakers and then became one yourself. Now pull it all together.</p>
-    <div class="divider">Part I — Looking Back Across Both Days</div>
+    <div class="stamp day2-stamp">Day 2 Complete</div>
+    <div class="masthead">
+      <div class="overline">End of Day 2 · Investigation Planning</div>
+      <hr class="rule-thick">
+      <h1 style="font-size:2rem;">Your Blueprint Is Ready.</h1>
+      <hr class="rule-thin">
+      <div class="subhead">Tomorrow you write — today you prepared</div>
+    </div>
+    <div class="callout green-callout">
+      <strong>📋 Day 2 Complete:</strong>
+      You've locked in your topic, headline, evidence plan, story structure, and three interview sources. Tomorrow you'll turn this blueprint into a real investigative article.
+    </div>
+    <div class="divider">Your Day 2 Blueprint at a Glance</div>
+    <div id="day2-summary-display"></div>
 
-    <label for="q5-change">Before this two-day activity, what did you think about how social change happens? What specifically from Day 1 or Day 2 shifted your thinking?</label>
-    <textarea id="q5-change" rows="3" placeholder="Before this activity, I thought change happened by… Day 1 changed my thinking when… and Day 2 showed me…"></textarea>
+    <div class="divider">Before You Go</div>
+    <label for="qd2-wrap">What is the single most important thing you still need to research or figure out before you start writing tomorrow? What would make your story stronger?</label>
+    <textarea id="qd2-wrap" rows="4" placeholder="Before writing, I still need to find out… This would strengthen my story because… I plan to look this up by…"></textarea>
+    <div class="wc-row"><span class="wc-badge low" id="wc-qd2-wrap">0 words</span><span class="wc-flag" id="flag-qd2-wrap"></span></div>
+
+    <div class="callout" style="margin-top:24px;">
+      <strong>💾 Your planning is saved.</strong>
+      Open this same file/link tomorrow and your full blueprint will be waiting. You can also print it now as a reference.
+    </div>
+    <div class="btn-group no-print">
+      <button class="btn btn-green" style="margin-top:0;" onclick="window.print()">🖨 Print Day 2 Blueprint</button>
+      <button class="btn btn-outline" style="margin-top:0;" onclick="copyDay2Blueprint()">📋 Copy Blueprint</button>
+    </div>
+    <div id="d2-copy-confirm" style="display:none;margin-top:8px;font-family:'Special Elite',cursive;font-size:12px;color:var(--green);letter-spacing:1px;">✓ Copied!</div>
+
+    <div class="error-msg" id="p7-error">Please write at least 5 words before wrapping up Day 2.</div>
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="goTo(6)">← Back to Planning</button>
+      <button class="btn" onclick="page7WrapNext()">See you tomorrow →</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 8: DAY 3 KICKOFF -->
+<div class="page" id="page-8">
+  <div style="height:30px"></div>
+  <div class="step-nav" id="step-nav-8"></div>
+  <div class="paper">
+    <div class="day-banner day3">★ Day 3 — Writing Your Story ★</div>
+    <div class="stamp day3-stamp">Day 3</div>
+    <div class="masthead">
+      <div class="overline">Day 3 · Writing Day</div>
+      <hr class="rule-thick">
+      <h1 style="font-size:2rem;">Time to Write.</h1>
+      <hr class="rule-thin">
+      <div class="subhead">Your blueprint is the map — now build the story</div>
+    </div>
+    <p class="lede">You spent Day 2 planning. Today you write the actual article. Your story structure, evidence plan, and headline are already locked in — use them.</p>
+
+    <div class="divider">Your Planning Recap</div>
+    <p style="font-size:0.88rem;color:var(--gray);margin-bottom:12px;">Here's your Day 2 blueprint. Keep this in mind as you write.</p>
+    <div id="day3-kickoff-display"></div>
+
+    <div class="divider">Before You Start Writing</div>
+    <label for="qd3-strategy">Look at your story outline from Day 2. Describe your opening strategy: what's the first scene, statistic, or person your reader will encounter — and why will it hook them?</label>
+    <textarea id="qd3-strategy" rows="4" placeholder="My opening will start with… I'm choosing this because it will immediately show the reader… The emotional hook is…"></textarea>
+    <div class="wc-row"><span class="wc-badge low" id="wc-qd3-strategy">0 words</span><span class="wc-flag" id="flag-qd3-strategy"></span></div>
+
+    <div class="error-msg" id="p8-error">Please describe your opening strategy before continuing.</div>
+    <div class="btn-group">
+      <div class="gate-btn-wrap" id="gate-wrap-8">
+        <button class="btn" id="gate-btn-8" onclick="page8KickoffNext()">Begin Writing →</button>
+        <div class="gate-overlay" id="gate-overlay-8">Review your blueprint first…</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 9: DAY 3 WRITING -->
+<div class="page" id="page-9">
+  <div style="height:30px"></div>
+  <div class="step-nav" id="step-nav-9"></div>
+  <div class="paper">
+    <div class="stamp day3-stamp">Day 3 · Your Story</div>
+    <h2>Write Your Investigative Article</h2>
+    <p class="lede">Muckrakers wrote to be read. They used vivid language, real people, shocking facts, and moral urgency. Now you do the same.</p>
+
+    <div class="callout">
+      <strong>📰 Your Article at a Glance</strong>
+      Your headline: <em id="writing-headline-ref" style="color:var(--cream);">—</em>
+    </div>
+
+    <div class="divider">Part I — The Hook (Lede)</div>
+    <p style="font-size:0.9rem;color:var(--gray);margin-bottom:0;">The <em>lede</em> is your opening paragraph. It must grab the reader immediately. Don't start with "In this article…" — start with a person, a scene, a statistic that demands attention.</p>
+    <label for="q-lede">Write your opening paragraph. Drop the reader into the story.</label>
+    <textarea id="q-lede" rows="5" placeholder="It was a Tuesday morning when ___, or, Every year, ___ children work 14-hour shifts for wages that can't buy a meal, or, The smell hits you before you even enter the building…"></textarea>
+    <div class="wc-row"><span class="wc-badge low" id="wc-q-lede">0 words</span><span class="wc-flag" id="flag-q-lede"></span></div>
+
+    <div class="divider">Part II — The Evidence</div>
+    <p style="font-size:0.9rem;color:var(--gray);margin-bottom:0;">This is the body of your article. Present your evidence. Name the people harmed. Quote your imagined interview subjects. Use facts and scenes, not just opinions.</p>
+    <label for="q-body">Write the body of your article. Include at least one fact, one person's experience, and one quote from an imagined source.</label>
+    <textarea id="q-body" rows="9" placeholder="[Fact] According to records from ___, …&#10;[Person] Maria, 12, works at the ___ factory six days a week. 'I haven't seen my family since ___,' she says.&#10;[Expert] 'The situation is unconscionable,' says ___. 'Without government action, ___…'"></textarea>
+    <div class="wc-row"><span class="wc-badge low" id="wc-q-body">0 words</span><span class="wc-flag" id="flag-q-body"></span></div>
+
+    <div class="divider">Part III — The Pull Quote</div>
+    <p style="font-size:0.9rem;color:var(--gray);margin-bottom:0;">A pull quote is the one sentence from your article that will be printed large on the front page — the line that makes someone stop and read. It should be powerful, specific, and unforgettable. You'll use this on your Canva newspaper.</p>
+    <label for="q-pullquote">Write your pull quote. One sentence. Make it count.</label>
+    <textarea id="q-pullquote" rows="2" placeholder="e.g., 'Thousands of children are dying in silence — and Congress has known for years.'"></textarea>
+    <div class="wc-row"><span class="wc-badge low" id="wc-q-pullquote">0 words</span><span class="wc-flag" id="flag-q-pullquote"></span></div>
+
+    <div class="divider">Part IV — The Call to Action</div>
+    <p style="font-size:0.9rem;color:var(--gray);margin-bottom:0;">Muckrakers didn't just describe problems — they demanded change. Your conclusion should tell readers exactly what needs to happen and why they should care.</p>
+    <label for="q-conclusion">Write your conclusion. Demand a specific change. Tell the reader what they should do or feel.</label>
+    <textarea id="q-conclusion" rows="4" placeholder="The time for inaction has passed. Congress must… If we do nothing, … The American public has the power to… Write to your representative. Boycott. Vote. Do not look away."></textarea>
+    <div class="wc-row"><span class="wc-badge low" id="wc-q-conclusion">0 words</span><span class="wc-flag" id="flag-q-conclusion"></span></div>
+
+    <div class="error-msg" id="p9-error">Please complete all four sections with at least 5 words each.</div>
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="goTo(8)">← Back</button>
+      <button class="btn" onclick="page9WritingNext()">Wrap Up Day 3 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 10: DAY 3 WRAP + CANVA PREVIEW -->
+<div class="page" id="page-10">
+  <div style="height:30px"></div>
+  <div class="step-nav" id="step-nav-10"></div>
+  <div class="paper">
+    <div class="stamp day3-stamp">Day 3 Complete</div>
+    <div class="masthead">
+      <div class="overline">End of Day 3 · Article Written</div>
+      <hr class="rule-thick">
+      <h1 style="font-size:2rem;">Your Story Is Written.</h1>
+      <hr class="rule-thin">
+      <div class="subhead">Tomorrow you design the front page</div>
+    </div>
+    <div class="callout green-callout">
+      <strong>📝 Day 3 Complete:</strong>
+      You've written a full investigative article — lede, evidence, pull quote, and call to action. Tomorrow you'll design a newspaper front page in Canva that brings your story to life.
+    </div>
+
+    <div class="divider">Your Article Preview</div>
+    <div id="day3-article-preview"></div>
+
+    <div class="divider">Tomorrow's Preview — What You'll Build</div>
+    <p style="font-size:0.9rem;line-height:1.7;">Tomorrow in Canva, you'll design a newspaper front page that includes:</p>
+    <ul class="canva-checklist">
+      <li><span class="ck-num">1</span><span>A <strong>masthead</strong> — the newspaper's name (invent one)</span></li>
+      <li><span class="ck-num">2</span><span>Your <strong>headline</strong> in large type</span></li>
+      <li><span class="ck-num">3</span><span>Your <strong>byline</strong> — "By [Your Name]" and the date</span></li>
+      <li><span class="ck-num">4</span><span>Your <strong>lede paragraph</strong> and at least part of your body text</span></li>
+      <li><span class="ck-num">5</span><span>Your <strong>pull quote</strong> featured prominently</span></li>
+      <li><span class="ck-num">6</span><span>At least one <strong>image or illustration</strong> with a caption</span></li>
+    </ul>
+    <div class="callout" style="margin-top:0;">
+      <strong>💡 Canva tip:</strong>
+      Search for <em>"newspaper front page"</em> or <em>"newspaper template"</em> in Canva templates. Look for a design with a clear headline area, body text columns, and space for a pull quote. You'll customize everything — just use the template as a layout guide.
+    </div>
+
+    <div class="divider">Day 3 Self-Check</div>
+    <label for="qd3-review">Read your lede paragraph again. What is the strongest sentence — and what is one thing you would change if you had more time?</label>
+    <textarea id="qd3-review" rows="4" placeholder="My strongest sentence is '___' because… If I had more time, I would change… because…"></textarea>
+    <div class="wc-row"><span class="wc-badge low" id="wc-qd3-review">0 words</span><span class="wc-flag" id="flag-qd3-review"></span></div>
+
+    <div class="callout" style="margin-top:20px;">
+      <strong>💾 Your article is saved.</strong>
+      Open this file tomorrow and your full article will be here to copy into Canva.
+    </div>
+    <div class="btn-group no-print">
+      <button class="btn btn-green" style="margin-top:0;" onclick="window.print()">🖨 Print Day 3 Article</button>
+      <button class="btn btn-outline" style="margin-top:0;" onclick="copyDay3Article()">📋 Copy Article Text</button>
+    </div>
+    <div id="d3-copy-confirm" style="display:none;margin-top:8px;font-family:'Special Elite',cursive;font-size:12px;color:var(--green);letter-spacing:1px;">✓ Copied!</div>
+
+    <div class="error-msg" id="p10-error">Please complete the self-check before continuing.</div>
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="goTo(9)">← Back to Writing</button>
+      <button class="btn" onclick="page10WrapNext()">Ready for Day 4 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 11: DAY 4 CANVA NEWSPAPER -->
+<div class="page" id="page-11">
+  <div style="height:30px"></div>
+  <div class="step-nav" id="step-nav-11"></div>
+  <div class="paper">
+    <div class="day-banner day4">★ Day 4 — Newspaper Design ★</div>
+    <div class="stamp day4-stamp">Day 4 · Design</div>
+    <h2>Build Your Front Page</h2>
+    <p class="lede">Every muckraker's article reached readers through a designed page. Today you'll become the editor and layout artist — using Canva to design a newspaper front page that makes your story impossible to ignore.</p>
+
+    <div class="divider">Your Story — Ready to Use</div>
+    <p style="font-size:0.88rem;color:var(--gray);margin-bottom:10px;">Copy these directly into your Canva design:</p>
+    <div id="day4-article-ref"></div>
+
+    <div class="divider">How to Get Started in Canva</div>
+    <ol style="padding-left:20px;line-height:2;font-size:0.9rem;">
+      <li>Go to <strong>canva.com</strong> and sign in (or create a free account)</li>
+      <li>Click <strong>Templates</strong> and search <em>"newspaper front page"</em></li>
+      <li>Choose a template — look for one with a large headline, columns, and a pull quote area</li>
+      <li>Customize: replace all placeholder text with your own headline, byline, lede, body, and pull quote</li>
+      <li>Add or replace the image with something relevant to your story (Canva has free stock photos)</li>
+      <li>When finished, click <strong>Share → Copy Link</strong> and paste it below</li>
+    </ol>
+
+    <div class="divider">Newspaper Requirements Checklist</div>
+    <p style="font-size:0.88rem;color:var(--gray);margin-bottom:6px;">Check each element off as you build your front page:</p>
+    <ul class="canva-checklist">
+      <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Masthead:</strong> Your newspaper's name — make it sound like a real paper from the era</span></li>
+      <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Headline:</strong> Your exact headline from Day 2 planning — large, bold, attention-grabbing</span></li>
+      <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Byline &amp; Date:</strong> "By [Your Name] — McClure's Magazine — [Year]"</span></li>
+      <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Article Text:</strong> Your lede and at least part of your body text, set in columns</span></li>
+      <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Pull Quote:</strong> Your one powerful sentence, styled large and set apart from body text</span></li>
+      <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Image + Caption:</strong> A photo or illustration relevant to your story with a one-sentence caption</span></li>
+      <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Color &amp; Typography:</strong> Fonts and colors feel like the Progressive Era — dark ink, classic serif type</span></li>
+    </ul>
+
+    <label for="qd4-canva-link" style="margin-top:24px;">Paste your Canva design link here when you're finished:</label>
+    <input type="text" id="qd4-canva-link" placeholder="https://www.canva.com/design/…">
+
+    <label for="qd4-canva-reflect">Design Reflection: What was the hardest design decision you made — and why did you make it? How do your layout choices help tell your story?</label>
+    <textarea id="qd4-canva-reflect" rows="4" placeholder="The hardest design choice was… I decided to… because it helps the reader… My layout makes the story feel…"></textarea>
+    <div class="wc-row"><span class="wc-badge low" id="wc-qd4-canva-reflect">0 words</span><span class="wc-flag" id="flag-qd4-canva-reflect"></span></div>
+
+    <div class="error-msg" id="p11-error">Please paste your Canva link and complete the reflection before continuing.</div>
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="goTo(10)">← Back</button>
+      <button class="btn" onclick="page11CanvaNext()">Continue to Final Reflection →</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 12: REFLECTION (DAY 4) -->
+<div class="page" id="page-12">
+  <div style="height:30px"></div>
+  <div class="step-nav" id="step-nav-12"></div>
+  <div class="paper">
+    <div class="stamp day4-stamp">Day 4 · Final</div>
+    <h2>The Bigger Picture</h2>
+    <p class="lede">Over four days you researched the muckrakers, planned your story, wrote your article, and designed a newspaper front page. Now pull it all together.</p>
+    <div class="divider">Part I — Looking Back Across All Four Days</div>
+
+    <label for="q5-change">Over these four days you researched, planned, wrote, and designed. What is the one idea that changed how you think about power, journalism, or social change?</label>
+    <textarea id="q5-change" rows="3" placeholder="The idea that most changed my thinking was… I used to believe… Now I understand that… The moment that shifted my perspective was on Day ___…"></textarea>
     <div class="wc-row"><span class="wc-badge low" id="wc-q5-change">0 words</span><span class="wc-flag" id="flag-q5-change"></span></div>
 
     <label for="q5-criticism">Ida Tarbell faced criticism for attacking "a great man." Jacob Riis was criticized for depicting immigrants as helpless. Upton Sinclair was criticized for writing fiction, not journalism. Choose one: was this criticism fair?</label>
@@ -778,20 +1056,20 @@
     <textarea id="q5-modern" rows="3" placeholder="Someone doing similar work today is ___ because they…"></textarea>
     <div class="wc-row"><span class="wc-badge low" id="wc-q5-modern">0 words</span><span class="wc-flag" id="flag-q5-modern"></span></div>
 
-    <label for="q5-final">🏁 Final Argument: In one paragraph, answer — <em>Why does muckraking matter?</em> Use at least TWO specific examples from your two days of work — one from the historical muckrakers and one from your own investigation plan.</label>
-    <textarea id="q5-final" rows="5" placeholder="Muckraking matters because… For example, Ida Tarbell's investigation showed… My own investigation into ___ demonstrates the same principle because…"></textarea>
+    <label for="q5-final">🏁 Final Argument: In one paragraph, answer — <em>Why does muckraking matter?</em> Use at least THREE specific examples from your four days of work — one from the historical muckrakers, one from your own investigation, and one from your newspaper design choices.</label>
+    <textarea id="q5-final" rows="5" placeholder="Muckraking matters because… For example, Ida Tarbell's investigation showed… My own investigation into ___ demonstrates… And my newspaper design choice to ___ reinforces this because…"></textarea>
     <div class="wc-row"><span class="wc-badge low" id="wc-q5-final">0 words</span><span class="wc-flag" id="flag-q5-final"></span></div>
 
-    <div class="error-msg" id="p5-error">Please answer all four questions with at least 5 words each.</div>
+    <div class="error-msg" id="p12-error">Please answer all four questions with at least 5 words each.</div>
     <div class="btn-group">
-      <button class="btn btn-outline" onclick="goTo(6)">← Back</button>
-      <button class="btn" onclick="page7Next()">Submit Investigation →</button>
+      <button class="btn btn-outline" onclick="goTo(11)">← Back</button>
+      <button class="btn" onclick="page12Next()">Submit Investigation →</button>
     </div>
   </div>
 </div>
 
-<!-- PAGE 8: COMPLETION -->
-<div class="page" id="page-8">
+<!-- PAGE 13: COMPLETION -->
+<div class="page" id="page-13">
   <div style="height:30px"></div>
   <div class="paper">
     <div class="masthead">
@@ -807,7 +1085,7 @@
       <p style="font-family:'Special Elite',cursive;font-size:1rem;color:var(--gray);margin:12px 0;">This certifies that</p>
       <p id="cert-name" style="font-family:'Playfair Display',serif;font-size:1.8rem;font-style:italic;color:var(--rust);">Student</p>
       <p style="font-family:'Special Elite',cursive;font-size:1rem;color:var(--gray);margin:8px 0;">has completed the</p>
-      <p style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;">Muckrakers Investigation · Two-Day Progressive Era Unit</p>
+      <p style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;">Muckrakers Investigation · Four-Day Unit · Investigative Journalism</p>
       <p id="cert-meta" style="font-family:'Special Elite',cursive;font-size:0.85rem;color:var(--gray);margin-top:10px;"></p>
     </div>
 
@@ -850,7 +1128,7 @@ const REPEAT_RATIO = 0.40;        // Single-word frequency threshold
 
 // ─── STATE ──────────────────────────────────────────────────────────
 let curPage     = 0;
-const TOTAL     = 9;
+const TOTAL     = 14;
 const ratings   = { tarbell:0, riis:0, sinclair:0 };
 let profilesRead = new Set();
 let qShown      = false;
@@ -863,7 +1141,12 @@ const FIELDS = [
   'q3-ratings','q3-critical',
   'qd1-bridge',
   'qd2-inspire',
-  'q4-topic','q4-headline','q4-harmed','q4-evidence','q4-change',
+  'q4-harmed','q4-evidence','q4-change','q4-outline','q4-interview',
+  'qd2-wrap',
+  'qd3-strategy',
+  'q-lede','q-body','q-pullquote','q-conclusion',
+  'qd3-review',
+  'qd4-canva-reflect',
   'q5-change','q5-criticism','q5-modern','q5-final'
 ];
 
@@ -902,10 +1185,10 @@ const SOURCE_NGRAMS = (function() {
 })();
 
 // Reading gates: page -> { minSec, unlocked, timer }
-const READ_GATES = { 1: { minSec:60, unlocked:false }, 2: { minSec:45, unlocked:false }, 5: { minSec:20, unlocked:false } };
+const READ_GATES = { 1: { minSec:60, unlocked:false }, 2: { minSec:45, unlocked:false }, 5: { minSec:20, unlocked:false }, 8: { minSec:20, unlocked:false }, 11: { minSec:15, unlocked:false } };
 
 // ─── NAVIGATION LABELS (must be before IIFE) ─────────────────────────
-const STEP_LABELS = ['Intro','Profiles','Sources','Impact','Day 1 Done','Day 2 Start','Investigate','Reflect','Done'];
+const STEP_LABELS = ['Intro','Profiles','Sources','Impact','Day 1 Done','Day 2 Start','Planning','Day 2 Done','Day 3 Start','Write','Day 3 Done','Newspaper','Reflect','Done'];
 
 // ─── BOOT ────────────────────────────────────────────────────────────
 (function init() {
@@ -927,17 +1210,17 @@ function adjustFont(dir) {
 // ─── NAVIGATION ──────────────────────────────────────────────────────
 
 function buildNavs() {
+  const DAY_SEPS = { 5: 'Day 2', 8: 'Day 3', 11: 'Day 4' };
   for (let p = 0; p < TOTAL; p++) {
     const nav = document.getElementById('step-nav-' + p);
     if (!nav) continue;
     nav.innerHTML = '';
     for (let i = 0; i < TOTAL; i++) {
-      // Insert day separator between step 4 (Day 1 Done) and step 5 (Day 2 Start)
-      if (i === 5) {
+      if (DAY_SEPS[i]) {
         const sep = document.createElement('div');
         sep.className = 'step-day-sep';
-        sep.innerHTML = '<span class="step-day-label">Day 2</span>';
-        sep.title = 'Day 2 begins here';
+        sep.innerHTML = '<span class="step-day-label">' + DAY_SEPS[i] + '</span>';
+        sep.title = DAY_SEPS[i] + ' begins here';
         nav.appendChild(sep);
       }
       const d = document.createElement('div');
@@ -971,6 +1254,14 @@ function goTo(n) {
   startReadGate(n);
   // Run duplicate scan on every forward transition
   if (n > 1) setTimeout(runDuplicateScan, 200);
+  // Build day summaries/references when relevant pages are shown
+  if (n === 4) setTimeout(buildDay1Summary, 50);
+  if (n === 5) setTimeout(buildDay2Recap, 50);
+  if (n === 7) setTimeout(buildDay2Summary, 50);
+  if (n === 8) setTimeout(buildDay3KickoffDisplay, 50);
+  if (n === 9) { const h = document.getElementById('writing-headline-ref'); if (h) h.textContent = gv('q4-headline')||'(headline from Day 2)'; }
+  if (n === 10) setTimeout(buildDay3ArticlePreview, 50);
+  if (n === 11) setTimeout(buildDay4ArticleRef, 50);
 }
 
 // ─── READING GATE ─────────────────────────────────────────────────────
@@ -1258,18 +1549,370 @@ function page3Next() {
   goTo(4);
 }
 
-function page6Next() {
+
+// ─── DAY 1 WRAP ───────────────────────────────────────────────────────
+function page4WrapNext() {
+  if (!enough('qd1-bridge')) { showErr('p4-error'); return; }
+  // Build Day 2 recap before advancing so it's ready
+  buildDay2Recap();
+  goTo(5);
+}
+
+// ─── DAY 2 KICKOFF ────────────────────────────────────────────────────
+function page5KickoffNext() {
+  if (!enough('qd2-inspire')) { showErr('p5-error'); return; }
+  goTo(6);
+}
+
+// ─── BUILD DAY 1 SUMMARY (shown on page 4) ───────────────────────────
+function buildDay1Summary() {
+  const el = document.getElementById('day1-summary-display');
+  if (!el) return;
+  const rl = RLABEL;
+  const profiles = [...profilesRead].map(m => m.charAt(0).toUpperCase() + m.slice(1)).join(', ') || '—';
+  el.innerHTML = `
+    <div class="fact-box">
+      <div class="fact-item">
+        <span class="fact-label">Profiles Read</span>
+        <p>${esc(profiles)}</p>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">Impact Ratings</span>
+        <p>Tarbell ${ratings.tarbell||'—'}/5 &nbsp;·&nbsp; Riis ${ratings.riis||'—'}/5 &nbsp;·&nbsp; Sinclair ${ratings.sinclair||'—'}/5</p>
+      </div>
+      <div class="fact-item" style="grid-column:1/-1;">
+        <span class="fact-label">What Muckrakers Have in Common</span>
+        <p>${esc(gv('q1-common')||'(not yet answered)')}</p>
+      </div>
+      <div class="fact-item" style="grid-column:1/-1;">
+        <span class="fact-label">Most Courageous Muckraker</span>
+        <p>${esc(gv('q1-courageous')||'(not yet answered)')}</p>
+      </div>
+      <div class="fact-item" style="grid-column:1/-1;">
+        <span class="fact-label">Impact Analysis</span>
+        <p>${esc(gv('q3-ratings')||'(not yet answered)')}</p>
+      </div>
+      <div class="fact-item" style="grid-column:1/-1;">
+        <span class="fact-label">Power &amp; Congress Reflection</span>
+        <p>${esc(gv('q3-critical')||'(not yet answered)')}</p>
+      </div>
+    </div>
+  `;
+}
+
+// ─── BUILD DAY 2 RECAP (shown on page 5) ─────────────────────────────
+function buildDay2Recap() {
+  const el = document.getElementById('day2-recap-display');
+  if (!el) return;
+  const profiles = [...profilesRead].map(m => m.charAt(0).toUpperCase() + m.slice(1)).join(', ') || '—';
+  el.innerHTML = `
+    <div class="fact-box">
+      <div class="fact-item">
+        <span class="fact-label">Impact Ratings</span>
+        <p>Tarbell ${ratings.tarbell||'—'}/5 &nbsp;·&nbsp; Riis ${ratings.riis||'—'}/5 &nbsp;·&nbsp; Sinclair ${ratings.sinclair||'—'}/5</p>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">Profiles Studied</span>
+        <p>${esc(profiles)}</p>
+      </div>
+      <div class="fact-item" style="grid-column:1/-1;">
+        <span class="fact-label">Your Day 1 Notes: What Muckrakers Have in Common</span>
+        <p>${esc(gv('q1-common')||'(not recorded)')}</p>
+      </div>
+      <div class="fact-item" style="grid-column:1/-1;">
+        <span class="fact-label">Your Day 1 Notes: Impact Analysis</span>
+        <p>${esc(gv('q3-ratings')||'(not recorded)')}</p>
+      </div>
+      <div class="fact-item" style="grid-column:1/-1;">
+        <span class="fact-label">Your Day 1 Bridge Question</span>
+        <p>${esc(gv('qd1-bridge')||'(not recorded)')}</p>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:0;">
+      <strong>📎 Reminder:</strong>
+      Use these notes as you plan your own investigation. You do not need to remember everything — it is all right here.
+    </div>
+  `;
+}
+
+// ─── COPY DAY 1 NOTES ─────────────────────────────────────────────────
+function copyDay1Notes() {
+  const profiles = [...profilesRead].map(m => m.charAt(0).toUpperCase() + m.slice(1)).join(', ') || '—';
+  const lines = [
+    '═══════════════════════════════════════',
+    'MUCKRAKERS INVESTIGATION — DAY 1 NOTES',
+    '═══════════════════════════════════════',
+    'Student: ' + gv('student-name'),
+    'Period:  ' + (gv('class-period') || '—'),
+    'Date:    ' + new Date().toLocaleDateString(),
+    '',
+    '--- IMPACT RATINGS ---',
+    'Tarbell:  ' + (ratings.tarbell||'—') + '/5',
+    'Riis:     ' + (ratings.riis||'—') + '/5',
+    'Sinclair: ' + (ratings.sinclair||'—') + '/5',
+    '',
+    '--- PROFILES READ ---',
+    profiles,
+    '',
+    '--- Q1a: What Muckrakers Have in Common ---',
+    gv('q1-common') || '(no answer)',
+    '',
+    '--- Q1b: Most Courageous ---',
+    gv('q1-courageous') || '(no answer)',
+    '',
+    '--- Q2a: Source A Analysis ---',
+    gv('q2-source-a') || '(no answer)',
+    '',
+    '--- Q2b: Source B Analysis ---',
+    gv('q2-source-b') || '(no answer)',
+    '',
+    '--- Q2c: Source C Analysis ---',
+    gv('q2-source-c') || '(no answer)',
+    '',
+    '--- Q2d: Persuasion Technique ---',
+    gv('q2-technique') || '(no answer)',
+    '',
+    '--- Q3a: Impact Explanation ---',
+    gv('q3-ratings') || '(no answer)',
+    '',
+    '--- Q3b: Power & Congress ---',
+    gv('q3-critical') || '(no answer)',
+    '',
+    '--- Day 1 Bridge Question ---',
+    gv('qd1-bridge') || '(no answer)',
+    '═══════════════════════════════════════',
+  ];
+  navigator.clipboard.writeText(lines.join('\n')).then(() => {
+    const el = document.getElementById('d1-copy-confirm');
+    el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', 3000);
+  }).catch(() => alert('Could not copy automatically. Use Print instead.'));
+}
+
+
+// ─── DAY 2 WRAP ───────────────────────────────────────────────────────
+function page7WrapNext() {
+  if (!enough('qd2-wrap')) { showErr('p7-error'); return; }
+  buildDay3KickoffDisplay();
+  goTo(8);
+}
+
+// ─── DAY 3 KICKOFF ────────────────────────────────────────────────────
+function page8KickoffNext() {
+  if (!enough('qd3-strategy')) { showErr('p8-error'); return; }
+  goTo(9);
+}
+
+// ─── DAY 3 WRITING ────────────────────────────────────────────────────
+function page9WritingNext() {
+  if (!enough('q-lede')||!enough('q-body')||!enough('q-pullquote')||!enough('q-conclusion')) { showErr('p9-error'); return; }
+  buildDay3ArticlePreview();
+  goTo(10);
+}
+
+// ─── DAY 3 WRAP ───────────────────────────────────────────────────────
+function page10WrapNext() {
+  if (!enough('qd3-review')) { showErr('p10-error'); return; }
+  buildDay4ArticleRef();
+  goTo(11);
+}
+
+// ─── DAY 4 CANVA ──────────────────────────────────────────────────────
+function page11CanvaNext() {
+  const link = document.getElementById('qd4-canva-link').value.trim();
+  if (!link || !enough('qd4-canva-reflect')) { showErr('p11-error'); return; }
+  goTo(12);
+}
+
+// ─── BUILD DAY 2 SUMMARY (shown on page 7 wrap) ───────────────────────
+function buildDay2Summary() {
+  const el = document.getElementById('day2-summary-display');
+  if (!el) return;
+  el.innerHTML = `
+    <div class="fact-box">
+      <div class="fact-item" style="grid-column:1/-1;">
+        <span class="fact-label">Your Investigation Topic</span>
+        <p><strong>${esc(gv('q4-topic')||'—')}</strong></p>
+      </div>
+      <div class="fact-item" style="grid-column:1/-1;">
+        <span class="fact-label">Your Headline</span>
+        <p><em>${esc(gv('q4-headline')||'—')}</em></p>
+      </div>
+      <div class="fact-item" style="grid-column:1/-1;">
+        <span class="fact-label">Story Outline</span>
+        <p>${esc(gv('q4-outline')||'(not yet recorded)')}</p>
+      </div>
+      <div class="fact-item" style="grid-column:1/-1;">
+        <span class="fact-label">Interview Sources</span>
+        <p>${esc(gv('q4-interview')||'(not yet recorded)')}</p>
+      </div>
+    </div>`;
+}
+
+// ─── BUILD DAY 3 KICKOFF DISPLAY (shown on page 8) ────────────────────
+function buildDay3KickoffDisplay() {
+  const el = document.getElementById('day3-kickoff-display');
+  if (!el) return;
+  el.innerHTML = `
+    <div class="fact-box">
+      <div class="fact-item" style="grid-column:1/-1;">
+        <span class="fact-label">Your Headline</span>
+        <p><strong><em>${esc(gv('q4-headline')||'—')}</em></strong></p>
+      </div>
+      <div class="fact-item" style="grid-column:1/-1;">
+        <span class="fact-label">Story Outline</span>
+        <p>${esc(gv('q4-outline')||'(not recorded)')}</p>
+      </div>
+      <div class="fact-item" style="grid-column:1/-1;">
+        <span class="fact-label">Evidence Plan</span>
+        <p>${esc(gv('q4-evidence')||'(not recorded)')}</p>
+      </div>
+      <div class="fact-item" style="grid-column:1/-1;">
+        <span class="fact-label">Interview Sources</span>
+        <p>${esc(gv('q4-interview')||'(not recorded)')}</p>
+      </div>
+      <div class="fact-item" style="grid-column:1/-1;">
+        <span class="fact-label">Opening Strategy (your note)</span>
+        <p>${esc(gv('qd3-strategy')||'(not yet written)')}</p>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:0;">
+      <strong>📎 Reminder from Day 2:</strong> ${esc(gv('qd2-wrap')||'Nothing recorded.')}
+    </div>`;
+  // Also update the live headline reference in the writing page callout
+  const hRef = document.getElementById('writing-headline-ref');
+  if (hRef) hRef.textContent = gv('q4-headline') || '(headline from Day 2 Planning)';
+}
+
+// ─── BUILD DAY 3 ARTICLE PREVIEW (page 10) ────────────────────────────
+function buildDay3ArticlePreview() {
+  const el = document.getElementById('day3-article-preview');
+  if (!el) return;
+  const headline = gv('q4-headline') || '(Your Headline)';
+  el.innerHTML = `
+    <div class="ref-card" style="margin-bottom:12px;">
+      <span class="ref-label">Headline</span>
+      <p><strong>${esc(headline)}</strong></p>
+    </div>
+    <div class="ref-card" style="margin-bottom:12px;">
+      <span class="ref-label">Opening Lede</span>
+      <p>${esc(gv('q-lede')||'—')}</p>
+    </div>
+    <div class="ref-card" style="margin-bottom:12px;">
+      <span class="ref-label">Pull Quote</span>
+      <p style="font-style:italic;font-size:1.05rem;">"${esc(gv('q-pullquote')||'—')}"</p>
+    </div>`;
+}
+
+// ─── BUILD DAY 4 ARTICLE REFERENCE (page 11) ─────────────────────────
+function buildDay4ArticleRef() {
+  const el = document.getElementById('day4-article-ref');
+  if (!el) return;
+  const headline = gv('q4-headline') || '(Your Headline)';
+  const name    = gv('student-name') || 'Your Name';
+  el.innerHTML = `
+    <div class="ref-card" style="margin-bottom:10px;">
+      <span class="ref-label">Headline — paste this in large type</span>
+      <p><strong>${esc(headline)}</strong></p>
+    </div>
+    <div class="ref-card" style="margin-bottom:10px;">
+      <span class="ref-label">Byline</span>
+      <p>By ${esc(name)} — McClure's Magazine — 1905</p>
+    </div>
+    <div class="ref-card" style="margin-bottom:10px;">
+      <span class="ref-label">Pull Quote — feature this prominently</span>
+      <p style="font-style:italic;font-size:1.05rem;">"${esc(gv('q-pullquote')||'—')}"</p>
+    </div>
+    <div class="ref-card" style="margin-bottom:10px;">
+      <span class="ref-label">Lede Paragraph — opening of your article</span>
+      <p>${esc(gv('q-lede')||'—')}</p>
+    </div>
+    <div class="ref-card">
+      <span class="ref-label">Body Text — paste this in columns</span>
+      <p>${esc(gv('q-body')||'—')}</p>
+    </div>`;
+}
+
+// ─── COPY DAY 2 BLUEPRINT ─────────────────────────────────────────────
+function copyDay2Blueprint() {
+  const lines = [
+    '═══════════════════════════════════════',
+    'MUCKRAKERS — DAY 2 INVESTIGATION BLUEPRINT',
+    '═══════════════════════════════════════',
+    'Student: ' + gv('student-name'),
+    'Period:  ' + (gv('class-period') || '—'),
+    '',
+    '--- TOPIC ---',
+    gv('q4-topic') || '(none)',
+    '',
+    '--- HEADLINE ---',
+    gv('q4-headline') || '(none)',
+    '',
+    '--- WHO IS HARMED / WHO BENEFITS ---',
+    gv('q4-harmed') || '(none)',
+    '',
+    '--- EVIDENCE PLAN ---',
+    gv('q4-evidence') || '(none)',
+    '',
+    '--- DESIRED CHANGE ---',
+    gv('q4-change') || '(none)',
+    '',
+    '--- STORY OUTLINE ---',
+    gv('q4-outline') || '(none)',
+    '',
+    '--- INTERVIEW SOURCES & QUESTIONS ---',
+    gv('q4-interview') || '(none)',
+    '',
+    '--- STILL NEED TO RESEARCH (Day 2 wrap) ---',
+    gv('qd2-wrap') || '(none)',
+    '═══════════════════════════════════════',
+  ];
+  navigator.clipboard.writeText(lines.join('\n')).then(() => {
+    const el = document.getElementById('d2-copy-confirm');
+    el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', 3000);
+  }).catch(() => alert('Could not copy automatically. Use Print instead.'));
+}
+
+// ─── COPY DAY 3 ARTICLE ───────────────────────────────────────────────
+function copyDay3Article() {
+  const name = gv('student-name') || 'Student';
+  const lines = [
+    '═══════════════════════════════════════',
+    gv('q4-headline') || 'YOUR HEADLINE',
+    'By ' + name + " — McClure's Magazine — 1905",
+    '═══════════════════════════════════════',
+    '',
+    gv('q-lede') || '(lede missing)',
+    '',
+    gv('q-body') || '(body missing)',
+    '',
+    '═══════════════════════════════════════',
+    'PULL QUOTE:',
+    '"' + (gv('q-pullquote') || '') + '"',
+    '═══════════════════════════════════════',
+    '',
+    gv('q-conclusion') || '(conclusion missing)',
+  ];
+  navigator.clipboard.writeText(lines.join('\n')).then(() => {
+    const el = document.getElementById('d3-copy-confirm');
+    el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', 3000);
+  }).catch(() => alert('Could not copy automatically. Use Print instead.'));
+}
+
+function page6PlanNext() {
   const t = document.getElementById('q4-topic').value.trim();
   const h = document.getElementById('q4-headline').value.trim();
-  if (t.length<3||h.length<5||!enough('q4-harmed')||!enough('q4-evidence')||!enough('q4-change')) { showErr('p4-error'); return; }
+  if (t.length<3||h.length<5||!enough('q4-harmed')||!enough('q4-evidence')||!enough('q4-change')||!enough('q4-outline')||!enough('q4-interview')) { showErr('p6-error'); return; }
   goTo(7);
 }
 
-function page7Next() {
-  if (!enough('q5-change')||!enough('q5-criticism')||!enough('q5-modern')||!enough('q5-final')) { showErr('p5-error'); return; }
+function page12Next() {
+  if (!enough('q5-change')||!enough('q5-criticism')||!enough('q5-modern')||!enough('q5-final')) { showErr('p12-error'); return; }
   buildCompletion();
   try { localStorage.removeItem('muck_v2'); } catch(e) {}
-  goTo(8);
+  goTo(13);
 }
 
 // ─── SANITIZE ────────────────────────────────────────────────────────
@@ -1290,7 +1933,10 @@ function saveSession() {
     const data = {
       name: gv('student-name'), period: gv('class-period'),
       ratings, profilesRead: [...profilesRead],
-      pasteCount, pageSeconds, fields: {}
+      pasteCount, pageSeconds,
+      topic: gv('q4-topic'), headline: gv('q4-headline'),
+      canvaLink: gv('qd4-canva-link'),
+      fields: {}
     };
     FIELDS.forEach(id => data.fields[id] = gv(id));
     localStorage.setItem('muck_v2', JSON.stringify(data));
@@ -1302,8 +1948,11 @@ function restoreSession() {
     const raw = localStorage.getItem('muck_v2');
     if (!raw) return;
     const d = JSON.parse(raw);
-    if (d.name)   document.getElementById('student-name').value = d.name;
-    if (d.period) document.getElementById('class-period').value  = d.period;
+    if (d.name)      document.getElementById('student-name').value = d.name;
+    if (d.period)    document.getElementById('class-period').value  = d.period;
+    if (d.topic)     { const e = document.getElementById('q4-topic');    if(e) e.value = d.topic; }
+    if (d.headline)  { const e = document.getElementById('q4-headline'); if(e) e.value = d.headline; }
+    if (d.canvaLink) { const e = document.getElementById('qd4-canva-link'); if(e) e.value = d.canvaLink; }
     if (d.profilesRead) d.profilesRead.forEach(m => profilesRead.add(m));
     if (d.ratings)      Object.assign(ratings, d.ratings);
     if (d.pasteCount)   Object.assign(pasteCount, d.pasteCount);
@@ -1345,11 +1994,12 @@ const CODE_FIELD_LIMIT = 300;
 
 function makeCode() {
   const data = {
-    v:3, n:gv('student-name'), p:gv('class-period'),
+    v:5, n:gv('student-name'), p:gv('class-period'),
     ts:new Date().toISOString(), r:ratings, f:{}, wc:{},
     fl:{}, paste:{}, time:{}, speed:{},
     tabs: tabSwitches, away: Math.round(tabAwayTotal),
-    ks:{}, idle:{}
+    ks:{}, idle:{}, topic:gv('q4-topic'), headline:gv('q4-headline'),
+    canva:gv('qd4-canva-link')
   };
   FIELDS.forEach(id => {
     const full = gv(id);
@@ -1383,6 +2033,7 @@ function copyAll() {
     '',
   ];
   const qs = [
+    ['── DAY 1 ──', null],
     ['Q1a — Muckraker Similarities','q1-common'],
     ['Q1b — Most Courageous','q1-courageous'],
     ['Q2a — Source A Analysis','q2-source-a'],
@@ -1391,19 +2042,38 @@ function copyAll() {
     ['Q2d — Persuasion Technique','q2-technique'],
     ['Q3a — Impact Explanation','q3-ratings'],
     ['Q3b — Power & Congress','q3-critical'],
-    ['Q4 — Topic','q4-topic'],
-    ['Q4 — Headline','q4-headline'],
-    ['Q4a — Who Is Harmed','q4-harmed'],
-    ['Q4b — Evidence','q4-evidence'],
-    ['Q4c — Desired Change','q4-change'],
-    ['Q5a — Change in Thinking','q5-change'],
-    ['Q5b — Criticism Analysis','q5-criticism'],
-    ['Q5c — Modern Muckraker','q5-modern'],
-    ['Q5d — Final Argument','q5-final'],
+    ['Q3c — Day 1 Bridge','qd1-bridge'],
+    ['── DAY 2 ──', null],
+    ['Q4 — Day 2 Inspiration','qd2-inspire'],
+    ['Q4a — Topic','q4-topic'],
+    ['Q4b — Headline','q4-headline'],
+    ['Q4c — Who Is Harmed','q4-harmed'],
+    ['Q4d — Evidence Plan','q4-evidence'],
+    ['Q4e — Desired Change','q4-change'],
+    ['Q4f — Story Outline','q4-outline'],
+    ['Q4g — Interview Sources','q4-interview'],
+    ['Q4h — Day 2 Wrap','qd2-wrap'],
+    ['── DAY 3 ──', null],
+    ['Q5a — Opening Strategy','qd3-strategy'],
+    ['Q5b — Lede','q-lede'],
+    ['Q5c — Body','q-body'],
+    ['Q5d — Pull Quote','q-pullquote'],
+    ['Q5e — Conclusion','q-conclusion'],
+    ['Q5f — Day 3 Self-Check','qd3-review'],
+    ['── DAY 4 ──', null],
+    ['Q6a — Canva Link','qd4-canva-link'],
+    ['Q6b — Design Reflection','qd4-canva-reflect'],
+    ['── FINAL REFLECTION ──', null],
+    ['Q7a — Change in Thinking','q5-change'],
+    ['Q7b — Criticism Analysis','q5-criticism'],
+    ['Q7c — Modern Muckraker','q5-modern'],
+    ['Q7d — Final Argument','q5-final'],
   ];
   qs.forEach(([lbl,id]) => {
+    if (id === null) { lines.push(''); lines.push(lbl); lines.push(''); return; }
+    const val = gv(id)||'(no answer)';
     lines.push('--- '+lbl+' ---');
-    lines.push(gv(id)||'(no answer)');
+    lines.push(val);
     lines.push('');
   });
   lines.push('--- SUBMISSION CODE ---');
@@ -1491,21 +2161,40 @@ function refreshLive() {
 
   // Answers table
   const qs=[
+    ['── DAY 1 ──', null],
     ['Similarities','q1-common'],['Most Courageous','q1-courageous'],
     ['Source A','q2-source-a'],['Source B','q2-source-b'],['Source C','q2-source-c'],['Technique','q2-technique'],
     ['Impact Expl.','q3-ratings'],['Power/Congress','q3-critical'],
-    ['Topic','q4-topic'],['Headline','q4-headline'],
-    ['Who Harmed','q4-harmed'],['Evidence','q4-evidence'],['Change','q4-change'],
-    ['Thinking','q5-change'],['Criticism','q5-criticism'],['Modern','q5-modern'],['Final Arg.','q5-final'],
+    ['Day 1 Bridge','qd1-bridge'],
+    ['── DAY 2 ──', null],
+    ['D2 Inspiration','qd2-inspire'],
+    ['Topic','q4-topic-ref'],['Headline','q4-headline-ref'],
+    ['Who Harmed','q4-harmed'],['Evidence Plan','q4-evidence'],['Desired Change','q4-change'],
+    ['Story Outline','q4-outline'],['Interview Qs','q4-interview'],
+    ['Day 2 Wrap','qd2-wrap'],
+    ['── DAY 3 ──', null],
+    ['Opening Strategy','qd3-strategy'],
+    ['Lede','q-lede'],['Body','q-body'],['Pull Quote','q-pullquote'],['Conclusion','q-conclusion'],
+    ['Day 3 Self-Check','qd3-review'],
+    ['── DAY 4 ──', null],
+    ['Canva Link','qd4-canva-link-ref'],['Design Reflect','qd4-canva-reflect'],
+    ['── FINAL ──', null],
+    ['Change in Thinking','q5-change'],['Criticism','q5-criticism'],['Modern','q5-modern'],['Final Arg.','q5-final'],
   ];
   html += '<div style="margin-top:8px;">';
   qs.forEach(([lbl,id]) => {
-    const count = wc(gv(id));
+    if (id === null) {
+      html += '<div style="font-family:Special Elite,cursive;font-size:10px;letter-spacing:2px;color:var(--rust);text-transform:uppercase;padding:8px 0 2px;border-top:1px solid var(--light-gray);margin-top:6px;">' + esc(lbl) + '</div>';
+      return;
+    }
+    const realId = id.endsWith('-ref') ? id.slice(0,-4) : id;
+    const val = gv(realId);
+    const count = wc(val);
     const ccls  = count>=MIN_WORDS?'ok':'low';
-    const fls   = [...(flags[id]||[]),...((pasteCount[id]||0)>0?['⚠ PASTE('+pasteCount[id]+')']:[])];
+    const fls   = [...(flags[realId]||[]),...((pasteCount[realId]||0)>0?['⚠ PASTE('+pasteCount[realId]+')']:[])];
     html += `<div class="td-row">
       <div class="td-q">${esc(lbl)}</div>
-      <div class="td-a">${esc(gv(id)||'—')}
+      <div class="td-a">${esc(val||'—')}
         ${fls.map(f=>'<span class="flag bad" style="font-size:9px;padding:1px 4px;margin-left:3px;">'+esc(f)+'</span>').join('')}
       </div>
       <span class="td-wc ${ccls}">${count}w</span>
@@ -1549,16 +2238,36 @@ function tDecode() {
   if(d.tabs!==undefined) html+=`<p style="font-family:'Special Elite',cursive;font-size:11px;letter-spacing:1px;color:var(--gray);margin-bottom:10px;">Tab switches: <strong>${d.tabs}</strong> &nbsp;|&nbsp; Away: <strong>${fmtTime(d.away||0)}</strong></p>`;
 
   const qs=[
+    ['── DAY 1 ──', null],
     ['Similarities','q1-common'],['Most Courageous','q1-courageous'],
     ['Source A','q2-source-a'],['Source B','q2-source-b'],['Source C','q2-source-c'],['Technique','q2-technique'],
     ['Impact Expl.','q3-ratings'],['Power/Congress','q3-critical'],
-    ['Topic','q4-topic'],['Headline','q4-headline'],
-    ['Who Harmed','q4-harmed'],['Evidence','q4-evidence'],['Change','q4-change'],
-    ['Thinking','q5-change'],['Criticism','q5-criticism'],['Modern','q5-modern'],['Final Arg.','q5-final'],
+    ['Day 1 Bridge','qd1-bridge'],
+    ['── DAY 2 ──', null],
+    ['D2 Inspiration','qd2-inspire'],
+    ['Topic','q4-topic-ref'],['Headline','q4-headline-ref'],
+    ['Who Harmed','q4-harmed'],['Evidence Plan','q4-evidence'],['Desired Change','q4-change'],
+    ['Story Outline','q4-outline'],['Interview Qs','q4-interview'],
+    ['Day 2 Wrap','qd2-wrap'],
+    ['── DAY 3 ──', null],
+    ['Opening Strategy','qd3-strategy'],
+    ['Lede','q-lede'],['Body','q-body'],['Pull Quote','q-pullquote'],['Conclusion','q-conclusion'],
+    ['Day 3 Self-Check','qd3-review'],
+    ['── DAY 4 ──', null],
+    ['Canva Link','qd4-canva-link-ref'],['Design Reflect','qd4-canva-reflect'],
+    ['── FINAL ──', null],
+    ['Change in Thinking','q5-change'],['Criticism','q5-criticism'],['Modern','q5-modern'],['Final Arg.','q5-final'],
   ];
   qs.forEach(([lbl,id])=>{
-    const ans = d.f&&d.f[id]?d.f[id]:'—';
-    const count = d.wc&&d.wc[id]?d.wc[id]:'?';
+    if (id===null){ html+='<div style="font-family:Special Elite,cursive;font-size:10px;letter-spacing:2px;color:var(--rust);text-transform:uppercase;padding:6px 0 2px;border-top:1px solid var(--light-gray);margin-top:4px;">'+esc(lbl)+'</div>'; return; }
+    const realId = id.endsWith('-ref') ? id.slice(0,-4) : id;
+    // topic/headline/canva stored separately in d.topic/d.headline/d.canva
+    let ans;
+    if (realId==='q4-topic') ans = d.topic||'—';
+    else if (realId==='q4-headline') ans = d.headline||'—';
+    else if (realId==='qd4-canva-link') ans = d.canva||'—';
+    else ans = d.f&&d.f[realId]?d.f[realId]:'—';
+    const count = d.wc&&d.wc[realId]?d.wc[realId]:'?';
     const ccls  = parseInt(count)>=MIN_WORDS?'ok':'low';
     html+=`<div class="td-row"><div class="td-q">${esc(lbl)}</div><div class="td-a">${esc(ans)}</div><span class="td-wc ${ccls}">${count}w</span></div>`;
   });
