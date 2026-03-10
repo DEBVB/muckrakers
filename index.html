@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Muckrakers: Investigative Journalism Activity</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Special+Elite&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --cream: #f5edd8;
+    --aged: #e8d9b5;
+    --rust: #b03a1e;
+    --gold: #c49a2a;
+    --gray: #5a5040;
+    --light-gray: #d4c9aa;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #2a2018;
+    font-family: 'Lora', serif;
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* ---- PROGRESS BAR ---- */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 4px;
+    background: var(--rust);
+    width: 0%;
+    transition: width 0.5s ease;
+    z-index: 999;
+    box-shadow: 0 0 8px var(--rust);
+  }
+
+  /* ---- WRAPPER ---- */
+  .page {
+    display: none;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    animation: fadeIn 0.6s ease both;
+  }
+  .page.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- PAPER CARD ---- */
+  .paper {
+    background: var(--cream);
+    border: 1px solid var(--light-gray);
+    padding: 40px 44px;
+    position: relative;
+    box-shadow: 4px 4px 0 #1a1208, 8px 8px 20px rgba(0,0,0,0.5);
+  }
+  .paper::after {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(180,160,100,0.3);
+    pointer-events: none;
+  }
+
+  /* ---- MASTHEAD ---- */
+  .masthead {
+    text-align: center;
+    border-bottom: 3px double var(--ink);
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+  }
+  .masthead .overline {
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+  .masthead h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--ink);
+    margin: 8px 0 4px;
+  }
+  .masthead .subhead {
+    font-family: 'Special Elite', cursive;
+    font-size: 13px;
+    color: var(--gray);
+    letter-spacing: 1px;
+  }
+  .rule-thick {
+    border: none;
+    border-top: 6px solid var(--ink);
+    margin: 10px 0 4px;
+  }
+  .rule-thin {
+    border: none;
+    border-top: 1px solid var(--ink);
+    margin: 4px 0 10px;
+  }
+
+  /* ---- STEP INDICATORS ---- */
+  .step-nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 0 32px;
+    flex-wrap: wrap;
+  }
+  .step-dot {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: #3a2e20;
+    border: 2px solid #5a4a30;
+    color: #888;
+    font-family: 'Special Elite', cursive;
+    font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s;
+  }
+  .step-dot.active {
+    background: var(--rust);
+    border-color: var(--rust);
+    color: white;
+    box-shadow: 0 0 10px rgba(176,58,30,0.5);
+  }
+  .step-dot.done {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--ink);
+  }
+
+  /* ---- TYPOGRAPHY ---- */
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.2;
+    padding-right: 80px; /* prevent stamp overlap */
+  }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--rust);
+    margin-bottom: 8px;
+  }
+  p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #2a200e;
+    margin-bottom: 12px;
+  }
+  .lede {
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--gray);
+    border-left: 3px solid var(--rust);
+    padding-left: 14px;
+    margin-bottom: 20px;
+  }
+
+  /* ---- STAMP ---- */
+  .stamp {
+    position: absolute;
+    top: 20px; right: 28px;
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rust);
+    border: 2px solid var(--rust);
+    padding: 4px 8px;
+    transform: rotate(6deg);
+    opacity: 0.7;
+  }
+
+  /* ---- MUCKRAKER CARDS ---- */
+  .muckraker-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin: 24px 0;
+  }
+  .muck-card {
+    background: var(--aged);
+    border: 1px solid var(--light-gray);
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .muck-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--rust);
+    transform: scaleY(0);
+    transition: transform 0.25s;
+    transform-origin: bottom;
+  }
+  .muck-card:hover::before,
+  .muck-card.selected::before { transform: scaleY(1); }
+  .muck-card:hover { box-shadow: 3px 3px 0 var(--rust); transform: translate(-2px,-2px); }
+  .muck-card.selected { box-shadow: 3px 3px 0 var(--rust); background: #ede0c0; }
+  .muck-card.visited::after {
+    content: '✓ Read';
+    position: absolute;
+    bottom: 8px; right: 10px;
+    font-family: 'Special Elite', cursive;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--rust);
+    opacity: 0.8;
+  }
+
+  /* ---- PROFILES COUNTER ---- */
+  .profiles-counter {
+    text-align: center;
+    font-family: 'Special Elite', cursive;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--gray);
+    margin: -8px 0 16px;
+  }
+  .profiles-counter span {
+    color: var(--rust);
+    font-size: 14px;
+  }
+  .muck-card .name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+  }
+  .muck-card .topic {
+    font-family: 'Special Elite', cursive;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--rust);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .muck-card p { font-size: 0.85rem; margin: 0; }
+
+  /* ---- SOURCE BOX ---- */
+  .source-box {
+    background: #ede0c0;
+    border: 1px solid var(--light-gray);
+    padding: 20px 24px;
+    margin: 20px 0;
+    position: relative;
+  }
+  .source-box .source-label {
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .source-box blockquote {
+    font-style: italic;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--ink);
+    padding-left: 16px;
+    border-left: 2px solid var(--gold);
+  }
+
+  /* ---- INPUTS ---- */
+  textarea, input[type="text"] {
+    width: 100%;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid var(--light-gray);
+    border-bottom: 2px solid var(--ink);
+    padding: 12px;
+    font-family: 'Lora', serif;
+    font-size: 0.9rem;
+    color: var(--ink);
+    resize: vertical;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  textarea:focus, input[type="text"]:focus {
+    border-color: var(--rust);
+    background: rgba(255,255,255,0.9);
+  }
+  label {
+    display: block;
+    font-family: 'Lora', serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 8px;
+    margin-top: 22px;
+  }
+
+  /* ---- INVESTIGATION CHECKLIST ---- */
+  .checklist { list-style: none; margin: 16px 0; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--light-gray);
+    font-size: 0.9rem;
+  }
+  .checklist li:last-child { border: none; }
+  .check-box {
+    width: 18px; height: 18px;
+    border: 2px solid var(--ink);
+    flex-shrink: 0;
+    margin-top: 2px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .check-box.checked {
+    background: var(--rust);
+    border-color: var(--rust);
+    color: white;
+    font-size: 12px;
+  }
+  .check-box.checked::after {
+    content: '✓';
+  }
+
+  /* ---- RATING SCALE ---- */
+  .rating-scale {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 10px 0;
+  }
+  .rating-btn {
+    flex: 1;
+    min-width: 60px;
+    padding: 10px 6px;
+    border: 2px solid var(--light-gray);
+    background: transparent;
+    cursor: pointer;
+    font-family: 'Special Elite', cursive;
+    font-size: 12px;
+    text-align: center;
+    transition: all 0.2s;
+    color: var(--gray);
+  }
+  .rating-btn:hover { border-color: var(--rust); color: var(--rust); }
+  .rating-btn.selected { background: var(--rust); border-color: var(--rust); color: white; }
+  .rating-btn small { font-size: 10px; display: block; margin-top: 2px; }
+
+  /* ---- BUTTONS ---- */
+  .btn {
+    display: inline-block;
+    font-family: 'Special Elite', cursive;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    border: 2px solid var(--ink);
+    background: var(--ink);
+    color: var(--cream);
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 24px;
+  }
+  .btn:hover { background: var(--rust); border-color: var(--rust); transform: translate(-2px,-2px); box-shadow: 3px 3px 0 var(--ink); }
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    margin-right: 12px;
+  }
+  .btn-outline:hover { background: var(--ink); color: var(--cream); }
+  .btn-group { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 28px; }
+
+  /* ---- CALLOUT ---- */
+  .callout {
+    background: var(--rust);
+    color: var(--cream);
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-family: 'Special Elite', cursive;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .callout strong { font-size: 1.1rem; display: block; margin-bottom: 4px; }
+
+  /* ---- DIVIDER ---- */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0;
+    color: var(--gray);
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    border-top: 1px solid var(--light-gray);
+  }
+
+  /* ---- FINAL CERTIFICATE ---- */
+  .certificate {
+    border: 4px double var(--gold);
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    background: var(--cream);
+    margin: 20px 0;
+  }
+  .certificate::before {
+    content: '★  ★  ★';
+    display: block;
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+  .certificate::after {
+    content: '★  ★  ★';
+    display: block;
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-top: 12px;
+  }
+  .certificate h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-style: italic;
+  }
+
+  /* ---- FACT BOX ---- */
+  .fact-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0;
+  }
+  .fact-item {
+    background: var(--aged);
+    border-left: 3px solid var(--rust);
+    padding: 12px 14px;
+  }
+  .fact-item .fact-label {
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 4px;
+    display: block;
+  }
+  .fact-item p { font-size: 0.9rem; margin: 0; }
+
+  /* ---- HIDDEN CONTENT ---- */
+  .reveal-section {
+    display: none;
+  }
+  .reveal-section.visible { display: block; animation: fadeIn 0.5s ease both; }
+
+  /* ---- COLUMN LAYOUT ---- */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    .fact-box { grid-template-columns: 1fr; }
+    .paper { padding: 24px 20px; }
+  }
+
+  /* ---- PROFILE BADGE ---- */
+  .profile-badge {
+    background: var(--rust);
+    color: var(--cream);
+    padding: 6px 14px;
+    display: inline-block;
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  /* ---- IMPACT RESULT ---- */
+  .impact-result {
+    background: var(--aged);
+    border: 1px solid var(--light-gray);
+    padding: 16px 20px;
+    margin: 12px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .impact-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  /* ---- ERROR message ---- */
+  .error-msg {
+    color: #8a1a08;
+    font-family: 'Lora', serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    background: #fde8e4;
+    border-left: 3px solid var(--rust);
+    padding: 10px 14px;
+    margin-top: 12px;
+    display: none;
+    line-height: 1.5;
+  }
+  .error-msg.visible { display: block; }
+
+  /* ---- PRINT STYLES ---- */
+  @media print {
+    body {
+      background: white !important;
+      color: black !important;
+    }
+    
+    /* Hide the noise texture overlay */
+    body::before {
+      display: none !important;
+    }
+
+    /* Hide non-essential UI elements */
+    #progress-bar,
+    .step-nav,
+    .btn-group,
+    .btn,
+    .error-msg,
+    #read-prompt {
+      display: none !important;
+    }
+
+    /* Remove paper shadows and borders for cleaner printing */
+    .paper {
+      box-shadow: none !important;
+      border: 1px solid #ccc !important;
+      background: white !important;
+      padding: 0 !important;
+    }
+    .paper::after {
+      display: none !important;
+    }
+
+    /* Ensure only the active page prints */
+    .page:not(.active) {
+      display: none !important;
+    }
+
+    /* Adjust the certificate to look great on paper */
+    .certificate {
+      border: 2px solid black !important;
+      background: white !important;
+      page-break-inside: avoid;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page active" id="page-0">
+  <div style="height:30px"></div>
+  <div class="step-nav" id="step-nav-0"></div>
+  <div class="paper">
+    <div class="masthead">
+      <div class="overline">8th Grade History · Progressive Era</div>
+      <hr class="rule-thick">
+      <h1>The Muckrakers</h1>
+      <hr class="rule-thin">
+      <div class="subhead">A Self-Guided Investigation into Investigative Journalism, 1890–1910</div>
+    </div>
+
+    <p class="lede">"The man with the muck-rake, the man who could look no way but downward… yet who was so essential to the well-being of society." — President Theodore Roosevelt, 1906</p>
+
+    <div class="two-col">
+      <div>
+        <h3>Your Mission</h3>
+        <p>You've already learned about the Progressive Era — a time when Americans demanded change. Today, you'll dig deeper into the <strong>journalists</strong> who made that change possible: the Muckrakers.</p>
+        <p>Like detectives, muckrakers exposed the ugly truths that powerful people wanted hidden. Today, you'll do the same kind of thinking.</p>
+      </div>
+      <div>
+        <h3>How This Works</h3>
+        <ul class="checklist" id="intro-checklist">
+          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>Read profiles of 3 famous muckrakers</span></li>
+          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>Analyze a real primary source excerpt</span></li>
+          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>Rate the impact of each journalist</span></li>
+          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>Write your own "muckraking" headline</span></li>
+          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>Reflect on what changed — and what didn't</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>🗞️ Before You Begin — Think About This:</strong>
+      Have you ever seen a news story that exposed something unfair? What happened after it was reported? Hold onto that thought — you'll need it at the end.
+    </div>
+
+    <label for="student-name">Your Name (for your Investigation Journal)</label>
+    <input type="text" id="student-name" placeholder="Type your name here...">
+    <div class="error-msg" id="name-error">Please enter your name to begin.</div>
+
+    <div class="btn-group">
+      <button class="btn" onclick="startInvestigation()">Begin Investigation →</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-1">
+  <div style="height:30px"></div>
+  <div class="step-nav" id="step-nav-1"></div>
+  <div class="paper">
+    <div class="stamp">Case File #1</div>
+    <h2>Meet the Muckrakers</h2>
+    <p class="lede">Before you can investigate, you need to know your subjects. Read each profile below, then answer the questions at the bottom.</p>
+
+    <div class="muckraker-grid">
+      <div class="muck-card" id="card-tarbell" role="button" tabindex="0" onclick="selectMuckraker('tarbell')" onkeydown="if(event.key==='Enter'||event.key===' ')selectMuckraker('tarbell')">
+        <div class="topic">Big Business</div>
+        <div class="name">Ida Tarbell</div>
+        <p>Took on the world's most powerful company — and won.</p>
+      </div>
+      <div class="muck-card" id="card-riis" role="button" tabindex="0" onclick="selectMuckraker('riis')" onkeydown="if(event.key==='Enter'||event.key===' ')selectMuckraker('riis')">
+        <div class="topic">Urban Poverty</div>
+        <div class="name">Jacob Riis</div>
+        <p>Used photography to expose the nightmare of New York's slums.</p>
+      </div>
+      <div class="muck-card" id="card-sinclair" role="button" tabindex="0" onclick="selectMuckraker('sinclair')" onkeydown="if(event.key==='Enter'||event.key===' ')selectMuckraker('sinclair')">
+        <div class="topic">Food Safety</div>
+        <div class="name">Upton Sinclair</div>
+        <p>Wrote a novel that made an entire nation sick — on purpose.</p>
+      </div>
+    </div>
+
+    <div class="profiles-counter" id="profiles-counter">
+      <span id="counter-num">0</span> of 3 profiles read — click each name above
+    </div>
+    <div id="profile-tarbell" class="reveal-section">
+      <div class="divider">Ida Tarbell · 1857–1944</div>
+      <div class="two-col">
+        <div>
+          <span class="profile-badge">Journalist & Historian</span>
+          <p>Ida Tarbell grew up in Pennsylvania's oil country. Her father, an oil producer, was nearly destroyed financially by John D. Rockefeller's Standard Oil Company. That experience shaped her life's mission.</p>
+          <p>In 1904, after years of meticulous research, she published <em>The History of Standard Oil</em> — a 19-part series in McClure's Magazine. She interviewed workers, gathered documents, and traced how Standard Oil <strong>crushed competition</strong> through secret railroad deals and price manipulation.</p>
+          <p>Her work led directly to the Supreme Court breaking up Standard Oil in 1911 — one of the most significant antitrust decisions in American history.</p>
+        </div>
+        <div>
+          <div class="fact-box" style="grid-template-columns:1fr;">
+            <div class="fact-item">
+              <span class="fact-label">Method</span>
+              <p>Document research, interviews, and statistical analysis over 5 years</p>
+            </div>
+            <div class="fact-item">
+              <span class="fact-label">Target</span>
+              <p>Standard Oil Company & John D. Rockefeller — the world's richest man</p>
+            </div>
+            <div class="fact-item">
+              <span class="fact-label">Result</span>
+              <p>U.S. Supreme Court orders Standard Oil dissolved (1911)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="profile-riis" class="reveal-section">
+      <div class="divider">Jacob Riis · 1849–1914</div>
+      <div class="two-col">
+        <div>
+          <span class="profile-badge">Journalist & Photographer</span>
+          <p>Jacob Riis immigrated from Denmark and experienced homelessness firsthand in New York City. He worked as a police reporter, spending years in the worst neighborhoods of Manhattan's Lower East Side.</p>
+          <p>In 1890, he published <em>How the Other Half Lives</em>, combining shocking photographs with firsthand accounts of life in <strong>tenement housing</strong> — cramped, dark apartments where immigrant families of 10 shared single rooms.</p>
+          <p>His photos of children sleeping in alleys and families in airless rooms shocked middle-class Americans who had never seen such conditions. Theodore Roosevelt, then NYC police commissioner, read the book and called it "an enlightenment and an inspiration."</p>
+        </div>
+        <div>
+          <div class="fact-box" style="grid-template-columns:1fr;">
+            <div class="fact-item">
+              <span class="fact-label">Method</span>
+              <p>Photography with magnesium flash powder — an early version of the camera flash</p>
+            </div>
+            <div class="fact-item">
+              <span class="fact-label">Target</span>
+              <p>Tenement housing conditions; landlord exploitation of immigrants</p>
+            </div>
+            <div class="fact-item">
+              <span class="fact-label">Result</span>
+              <p>NYC passed new tenement housing laws; unsafe buildings demolished</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="profile-sinclair" class="reveal-section">
+      <div class="divider">Upton Sinclair · 1878–1968</div>
+      <div class="two-col">
+        <div>
+          <span class="profile-badge">Novelist & Activist</span>
+          <p>Upton Sinclair spent seven weeks working undercover in Chicago's meatpacking plants in 1904. What he found was horrifying: diseased animals processed for food, workers injured and ignored, and unsanitary conditions throughout.</p>
+          <p>He published his findings as a novel, <em>The Jungle</em> (1906), hoping to create sympathy for the immigrant workers being exploited. Instead, the public's attention went entirely to the <strong>food safety revelations</strong>. As Sinclair famously said: "I aimed at the public's heart and by accident hit its stomach."</p>
+          <p>Within months of publication, Congress passed the Pure Food and Drug Act and the Meat Inspection Act of 1906.</p>
+        </div>
+        <div>
+          <div class="fact-box" style="grid-template-columns:1fr;">
+            <div class="fact-item">
+              <span class="fact-label">Method</span>
+              <p>Undercover investigation embedded with workers for 7 weeks</p>
+            </div>
+            <div class="fact-item">
+              <span class="fact-label">Target</span>
+              <p>Meatpacking industry — unsafe conditions for workers AND consumers</p>
+            </div>
+            <div class="fact-item">
+              <span class="fact-label">Result</span>
+              <p>Pure Food & Drug Act (1906) — foundation of today's FDA</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="profile-questions" class="reveal-section">
+      <div class="divider">Your Observations</div>
+
+      <label for="q1-common">What do all three muckrakers have in common? (Name at least 2 similarities)</label>
+      <textarea id="q1-common" rows="3" placeholder="Both Tarbell and Riis... All three..."></textarea>
+
+      <label for="q1-courageous">Which muckraker do you think was most courageous, and why?</label>
+      <textarea id="q1-courageous" rows="3" placeholder="I think ___ was most courageous because..."></textarea>
+
+      <div class="error-msg" id="p1-error">Please read all three profiles and answer both questions to continue.</div>
+
+      <div class="btn-group">
+        <button class="btn btn-outline" onclick="goToPage(0)">← Back</button>
+        <button class="btn" onclick="nextFromPage1()">Continue to Primary Sources →</button>
+      </div>
+    </div>
+
+    <div id="read-prompt" style="margin-top:20px; font-family:'Special Elite',cursive; font-size:12px; color:var(--gray); letter-spacing:1px;">
+      ↑ Click a name above to read their full profile
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-2">
+  <div style="height:30px"></div>
+  <div class="step-nav" id="step-nav-2"></div>
+  <div class="paper">
+    <div class="stamp">Case File #2</div>
+    <h2>Read the Evidence</h2>
+    <p class="lede">Historians don't just take other people's word for it — they read the original sources. Below are real excerpts. Read carefully; then answer as a historical detective.</p>
+
+    <h3>Source A — Upton Sinclair, <em>The Jungle</em>, 1906</h3>
+    <div class="source-box">
+      <span class="source-label">Primary Source · Novel (Based on Firsthand Investigation)</span>
+      <blockquote>
+        "There was never the least attention paid to what was cut up for sausage... there would be meat that had tumbled out on the floor, in the dirt and sawdust, where the workers had tramped and spit uncounted billions of consumption germs. There would be meat stored in great piles in rooms; and the water from leaky roofs would drip over it, and thousands of rats would race about on it."
+      </blockquote>
+    </div>
+
+    <h3>Source B — Ida Tarbell, <em>The History of Standard Oil</em>, 1904</h3>
+    <div class="source-box">
+      <span class="source-label">Adapted from Primary Source · McClure's Magazine Investigative Series</span>
+      <blockquote>
+        "Mr. Rockefeller was more troubled by a competitor who made cheaper oil than by one who made better oil... It was not enough that Standard Oil got rebates — special lower shipping rates — from the railroads. It also demanded that the railroads pay it a portion of what competitors paid for shipping. The competitor was not only deprived of his equal rights, but his payments went to build up the very power that was destroying him."
+      </blockquote>
+    </div>
+
+    <h3>Source C — Jacob Riis, <em>How the Other Half Lives</em>, 1890</h3>
+    <div class="source-box">
+      <span class="source-label">Primary Source · Photojournalism Book</span>
+      <blockquote>
+        "In a room not thirteen feet either way slept twelve men and women, two or three in bunks set in a sort of alcove, the rest on the floor. A kerosene lamp burned dimly in the fearful atmosphere, probably to guide other and later arrivals to their 'beds,' for it was only just past midnight. A baby's faint wail came from an adjoining hall-room."
+      </blockquote>
+    </div>
+
+    <div class="divider">Document Analysis</div>
+
+    <label for="q2-source-a">Source A — What specific details make Sinclair's description powerful? Why might these details shock readers?</label>
+    <textarea id="q2-source-a" rows="3" placeholder="The detail about ___ is powerful because readers would..."></textarea>
+
+    <label for="q2-source-b">Source B — Tarbell describes Rockefeller's business tactics. In your own words, what was unfair about what Standard Oil did?</label>
+    <textarea id="q2-source-b" rows="3" placeholder="Standard Oil was unfair because..."></textarea>
+
+    <label for="q2-source-c">Source C — Riis uses very specific measurements and sensory details. Why do you think he chose to write this way?</label>
+    <textarea id="q2-source-c" rows="3" placeholder="Riis uses numbers like '13 feet' and details like 'a baby's faint wail' to..."></textarea>
+
+    <label for="q2-technique">🔍 The Big Question: All three writers are trying to PERSUADE readers to care. What writing technique do all three use to do that?</label>
+    <textarea id="q2-technique" rows="3" placeholder="All three writers use ___ to persuade readers. For example..."></textarea>
+
+    <div class="error-msg" id="p2-error">Please answer all four questions before continuing.</div>
+
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="goToPage(1)">← Back</button>
+      <button class="btn" onclick="nextFromPage2()">Continue to Impact Analysis →</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-3">
+  <div style="height:30px"></div>
+  <div class="step-nav" id="step-nav-3"></div>
+  <div class="paper">
+    <div class="stamp">Case File #3</div>
+    <h2>Measuring the Impact</h2>
+    <p class="lede">Good journalism should <em>change things</em>. But did it? Rate each muckraker's impact using the evidence you've read.</p>
+
+    <div class="callout">
+      <strong>🎯 Historian's Note:</strong>
+      Impact isn't just about what changed immediately. Think about: Did it change laws? Did it change how people thought? Did the changes last? Did it help the right people?
+    </div>
+
+    <div class="impact-result">
+      <div class="impact-icon">⚖️</div>
+      <div>
+        <strong style="font-family:'Playfair Display',serif;">Ida Tarbell's Impact</strong>
+        <p style="font-size:0.85rem;margin:4px 0 0;">Standard Oil was broken into 34 smaller companies in 1911. But ironically, the smaller companies eventually became ExxonMobil, Chevron, and other giants we know today.</p>
+      </div>
+    </div>
+    <label id="lbl-tarbell" style="margin-top:14px;">Rate Tarbell's overall impact (1 = minor, 5 = transformative)</label>
+    <div class="rating-scale" id="rating-tarbell" aria-labelledby="lbl-tarbell" role="group">
+      <button class="rating-btn" onclick="setRating('tarbell',1,this)">1<br><small>Minor</small></button>
+      <button class="rating-btn" onclick="setRating('tarbell',2,this)">2</button>
+      <button class="rating-btn" onclick="setRating('tarbell',3,this)">3<br><small>Moderate</small></button>
+      <button class="rating-btn" onclick="setRating('tarbell',4,this)">4</button>
+      <button class="rating-btn" onclick="setRating('tarbell',5,this)">5<br><small>Transformative</small></button>
+    </div>
+
+    <div class="impact-result" style="margin-top:20px;">
+      <div class="impact-icon">🏚️</div>
+      <div>
+        <strong style="font-family:'Playfair Display',serif;">Jacob Riis's Impact</strong>
+        <p style="font-size:0.85rem;margin:4px 0 0;">NYC passed new tenement laws and demolished some dangerous buildings. But immigrant neighborhoods remained overcrowded and poor for decades. By 1910, over 1 million people still lived in Manhattan tenements.</p>
+      </div>
+    </div>
+    <label id="lbl-riis" style="margin-top:14px;">Rate Riis's overall impact (1 = minor, 5 = transformative)</label>
+    <div class="rating-scale" id="rating-riis" aria-labelledby="lbl-riis" role="group">
+      <button class="rating-btn" onclick="setRating('riis',1,this)">1<br><small>Minor</small></button>
+      <button class="rating-btn" onclick="setRating('riis',2,this)">2</button>
+      <button class="rating-btn" onclick="setRating('riis',3,this)">3<br><small>Moderate</small></button>
+      <button class="rating-btn" onclick="setRating('riis',4,this)">4</button>
+      <button class="rating-btn" onclick="setRating('riis',5,this)">5<br><small>Transformative</small></button>
+    </div>
+
+    <div class="impact-result" style="margin-top:20px;">
+      <div class="impact-icon">🥩</div>
+      <div>
+        <strong style="font-family:'Playfair Display',serif;">Upton Sinclair's Impact</strong>
+        <p style="font-size:0.85rem;margin:4px 0 0;">The Pure Food & Drug Act (1906) directly resulted from public outrage over <em>The Jungle</em>. It created the foundation for today's FDA. But Sinclair's real goal — improving workers' conditions — was largely ignored by Congress and the public.</p>
+      </div>
+    </div>
+    <label id="lbl-sinclair" style="margin-top:14px;">Rate Sinclair's overall impact (1 = minor, 5 = transformative)</label>
+    <div class="rating-scale" id="rating-sinclair" aria-labelledby="lbl-sinclair" role="group">
+      <button class="rating-btn" onclick="setRating('sinclair',1,this)">1<br><small>Minor</small></button>
+      <button class="rating-btn" onclick="setRating('sinclair',2,this)">2</button>
+      <button class="rating-btn" onclick="setRating('sinclair',3,this)">3<br><small>Moderate</small></button>
+      <button class="rating-btn" onclick="setRating('sinclair',4,this)">4</button>
+      <button class="rating-btn" onclick="setRating('sinclair',5,this)">5<br><small>Transformative</small></button>
+    </div>
+
+    <div style="height:16px"></div>
+
+    <label for="q3-ratings">Explain your ratings: Which muckraker had the most lasting impact and why? Consider who benefited — and who didn't.</label>
+    <textarea id="q3-ratings" rows="4" placeholder="I rated ___ the highest because... However, we also need to consider that..."></textarea>
+
+    <label for="q3-critical">💭 Critical Thinking: Why do you think Congress responded more to food safety concerns than to workers' rights? What does that tell you about who had power in 1906?</label>
+    <textarea id="q3-critical" rows="4" placeholder="Congress responded to food safety because the people who cared about that were... This shows that..."></textarea>
+
+    <div class="error-msg" id="p3-error">Please rate all three muckrakers and answer both questions.</div>
+
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="goToPage(2)">← Back</button>
+      <button class="btn" onclick="nextFromPage3()">Continue to Your Investigation →</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-4">
+  <div style="height:30px"></div>
+  <div class="step-nav" id="step-nav-4"></div>
+  <div class="paper">
+    <div class="stamp">Case File #4</div>
+    <h2>Your Muckraking Assignment</h2>
+    <p class="lede">Now it's your turn. Every muckraker started with a problem they wanted to expose. What would <em>you</em> investigate?</p>
+
+    <div class="callout">
+      <strong>🖊️ Reporter's Brief</strong>
+      Imagine it's 1905. Your editor at <em>McClure's Magazine</em> has given you an assignment: find a problem in American society, research it, and write a story that will make the public demand change.
+    </div>
+
+    <label for="q4-topic">What problem would you investigate? (Pick something real — in 1900s America or today)</label>
+    <input type="text" id="q4-topic" placeholder="e.g., child labor in factories, unsafe tenement buildings, railroad price fixing...">
+
+    <label for="q4-headline">Write your front-page headline. Make it specific and attention-grabbing — this is what readers see first!</label>
+    <input type="text" id="q4-headline" placeholder="e.g., 'STANDARD OIL CRUSHES THOUSANDS: How One Company Controls American Business'">
+
+    <label for="q4-harmed">Who is harmed by this problem? Who benefits from keeping it hidden?</label>
+    <textarea id="q4-harmed" rows="3" placeholder="The people harmed are... The people who benefit from hiding this are..."></textarea>
+
+    <label for="q4-evidence">What evidence would you need to prove this story? How would you get it? (Think about how Tarbell, Riis, and Sinclair gathered their evidence)</label>
+    <textarea id="q4-evidence" rows="4" placeholder="To prove this story, I would need... I could gather this by... like how Sinclair/Tarbell/Riis..."></textarea>
+
+    <label for="q4-change">What change do you hope your story causes? Be specific — a new law? A public awareness shift? A court decision?</label>
+    <textarea id="q4-change" rows="3" placeholder="I hope my story leads to... Because right now..."></textarea>
+
+    <div class="error-msg" id="p4-error">Please complete all fields before continuing.</div>
+
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="goToPage(3)">← Back</button>
+      <button class="btn" onclick="nextFromPage4()">Continue to Final Reflection →</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-5">
+  <div style="height:30px"></div>
+  <div class="step-nav" id="step-nav-5"></div>
+  <div class="paper">
+    <div class="stamp">Final Report</div>
+    <h2>The Bigger Picture</h2>
+    <p class="lede">You've read, analyzed, rated, and written. Now pull it all together. These final questions push you to think like a historian — connecting the past to the present.</p>
+
+    <div class="divider">Part I — Looking Back</div>
+
+    <label for="q5-change">Before today, what did you think about how social change happens? Did this activity change your thinking at all?</label>
+    <textarea id="q5-change" rows="3" placeholder="Before today, I thought change happened by... Now I think..."></textarea>
+
+    <label for="q5-criticism">Ida Tarbell faced criticism for attacking "a great man." Jacob Riis was criticized for sometimes depicting immigrants as helpless victims. Upton Sinclair was criticized for writing fiction, not journalism. Choose one: was this criticism fair?</label>
+    <textarea id="q5-criticism" rows="4" placeholder="I think the criticism of ___ was (fair / unfair) because..."></textarea>
+
+    <div class="divider">Part II — Connecting to Today</div>
+
+    <label for="q5-modern">Can you think of a modern journalist, documentary filmmaker, or activist who does similar work to the muckrakers? What problem are they exposing?</label>
+    <textarea id="q5-modern" rows="3" placeholder="Someone doing similar work today is ___ because they..."></textarea>
+
+    <label for="q5-final">🏁 Final Argument: In one paragraph, answer this question — <em>Why does muckraking matter?</em> Use at least TWO specific examples from today's activity.</label>
+    <textarea id="q5-final" rows="5" placeholder="Muckraking matters because... For example, Ida Tarbell's investigation showed... Similarly, Upton Sinclair demonstrated... Without this kind of journalism..."></textarea>
+
+    <div class="error-msg" id="p5-error">Please answer all four questions to complete your investigation.</div>
+
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="goToPage(4)">← Back</button>
+      <button class="btn" onclick="nextFromPage5()">Submit Investigation →</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-6">
+  <div style="height:30px"></div>
+  <div class="paper">
+    <div class="masthead">
+      <div class="overline">Investigation Complete</div>
+      <hr class="rule-thick">
+      <h1 style="font-size:2.2rem;">Extra! Extra!</h1>
+      <hr class="rule-thin">
+      <div class="subhead" id="completion-subhead">Investigation Journal Submitted</div>
+    </div>
+
+    <div class="certificate">
+      <h2>Certificate of Investigation</h2>
+      <p style="font-family:'Special Elite',cursive; font-size:1rem; color:var(--gray); margin: 12px 0;">This certifies that</p>
+      <p id="cert-name" style="font-family:'Playfair Display',serif; font-size:1.8rem; font-style:italic; color:var(--rust);">Student</p>
+      <p style="font-family:'Special Elite',cursive; font-size:1rem; color:var(--gray); margin: 8px 0;">has completed the</p>
+      <p style="font-family:'Playfair Display',serif; font-weight:700; font-size:1.1rem;">Muckrakers Investigation · Progressive Era Unit</p>
+      <p style="font-family:'Special Elite',cursive; font-size:0.85rem; color:var(--gray); margin-top:10px;">March 2026 · 8th Grade History</p>
+    </div>
+
+    <div class="divider">Your Investigation Summary</div>
+
+    <div id="summary-section"></div>
+
+    <div class="callout" style="margin-top:24px;">
+      <strong>📰 Remember Sinclair's Quote:</strong>
+      "I aimed at the public's heart and by accident hit its stomach." Sometimes our actions have unintended consequences — even positive ones. What matters is that someone <em>tried</em> to make things better.
+    </div>
+
+    <p style="font-family:'Special Elite',cursive; font-size:12px; color:var(--gray); text-align:center; margin-top:24px; letter-spacing:2px;">END OF INVESTIGATION · WELL DONE, REPORTER</p>
+  </div>
+</div>
+
+<script>
+  // ---- STATE ----
+  let currentPage = 0;
+  const totalPages = 7;
+  const ratings = { tarbell: 0, riis: 0, sinclair: 0 };
+  let profilesRead = new Set();
+  let questionsShown = false;
+
+  // ---- LOCAL STORAGE AUTO-SAVE ----
+  const STORAGE_KEY = 'muckraker_investigation_data';
+
+  function saveProgress() {
+    const data = {
+      currentPage: currentPage,
+      name: document.getElementById('student-name').value,
+      profilesRead: Array.from(profilesRead),
+      ratings: ratings,
+      answers: {
+        'q1-common': document.getElementById('q1-common').value,
+        'q1-courageous': document.getElementById('q1-courageous').value,
+        'q2-source-a': document.getElementById('q2-source-a').value,
+        'q2-source-b': document.getElementById('q2-source-b').value,
+        'q2-source-c': document.getElementById('q2-source-c').value,
+        'q2-technique': document.getElementById('q2-technique').value,
+        'q3-ratings': document.getElementById('q3-ratings').value,
+        'q3-critical': document.getElementById('q3-critical').value,
+        'q4-topic': document.getElementById('q4-topic').value,
+        'q4-headline': document.getElementById('q4-headline').value,
+        'q4-harmed': document.getElementById('q4-harmed').value,
+        'q4-evidence': document.getElementById('q4-evidence').value,
+        'q4-change': document.getElementById('q4-change').value,
+        'q5-change': document.getElementById('q5-change').value,
+        'q5-criticism': document.getElementById('q5-criticism').value,
+        'q5-modern': document.getElementById('q5-modern').value,
+        'q5-final': document.getElementById('q5-final').value
+      }
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function loadProgress() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const data = JSON.parse(saved);
+      
+      // 1. Restore Name & Text Answers
+      if (data.name) document.getElementById('student-name').value = data.name;
+      if (data.answers) {
+        for (const [id, value] of Object.entries(data.answers)) {
+          const el = document.getElementById(id);
+          if (el) el.value = value;
+        }
+      }
+      
+      // 2. Restore Profiles Read
+      if (data.profilesRead) {
+        data.profilesRead.forEach(who => selectMuckraker(who));
+      }
+      
+      // 3. Restore Ratings
+      if (data.ratings) {
+        for (const [who, val] of Object.entries(data.ratings)) {
+          if (val > 0) {
+            const container = document.getElementById('rating-' + who);
+            if (container) {
+              const btn = container.querySelectorAll('.rating-btn')[val - 1];
+              if (btn) setRating(who, val, btn);
+            }
+          }
+        }
+      }
+      
+      // 4. Restore Page (and rebuild completion if they were finished)
+      if (data.currentPage !== undefined) {
+        if (data.currentPage === 6) buildCompletion();
+        goToPage(data.currentPage);
+      }
+    }
+  }
+
+  // Auto-save whenever a user types anything
+  document.addEventListener('input', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+      saveProgress();
+    }
+  });
+
+  // ---- STEP NAV ----
+  const stepLabels = ['Intro','Profiles','Sources','Impact','Investigate','Reflect','Done'];
+
+  function buildStepNavs() {
+    for (let p = 0; p < totalPages; p++) {
+      const nav = document.getElementById('step-nav-' + p);
+      if (!nav) continue;
+      nav.innerHTML = '';
+      for (let i = 0; i < totalPages; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'step-dot' + (i === p ? ' active' : (i < p ? ' done' : ''));
+        dot.textContent = i < p ? '✓' : (i + 1);
+        dot.title = stepLabels[i];
+        nav.appendChild(dot);
+      }
+    }
+  }
+
+  function updateProgress(page) {
+    const pct = (page / (totalPages - 1)) * 100;
+    document.getElementById('progress-bar').style.width = pct + '%';
+  }
+
+  function goToPage(n) {
+    document.getElementById('page-' + currentPage).classList.remove('active');
+    currentPage = n;
+    const target = document.getElementById('page-' + currentPage);
+    target.classList.add('active');
+    // Force animation re-trigger by flushing layout
+    void target.offsetWidth;
+    window.scrollTo(0, 0);
+    updateProgress(n);
+    saveProgress(); // Auto-save on page change
+  }
+
+  // ---- CHECKLIST ----
+  function toggleCheck(el) {
+    el.classList.toggle('checked');
+    el.setAttribute('aria-checked', el.classList.contains('checked') ? 'true' : 'false');
+  }
+
+  // ---- MUCKRAKER SELECT ----
+  function selectMuckraker(who) {
+    // Remove selected state from all cards (not visited)
+    ['tarbell','riis','sinclair'].forEach(m => {
+      document.getElementById('profile-' + m).classList.remove('visible');
+      document.getElementById('card-' + m).classList.remove('selected');
+    });
+    // Show selected profile
+    document.getElementById('profile-' + who).classList.add('visible');
+    document.getElementById('card-' + who).classList.add('selected');
+
+    // Track visited + mark card
+    profilesRead.add(who);
+    document.getElementById('card-' + who).classList.add('visited');
+
+    // Update counter
+    const count = profilesRead.size;
+    document.getElementById('counter-num').textContent = count;
+    const counter = document.getElementById('profiles-counter');
+    if (count === 3) {
+      counter.innerHTML = '<span>✓ All 3 profiles read!</span> Now answer the questions below.';
+    } else {
+      counter.innerHTML = '<span>' + count + '</span> of 3 profiles read — click the others too';
+    }
+
+    // Hide the old prompt
+    document.getElementById('read-prompt').style.display = 'none';
+
+    // Show questions after first read
+    if (!questionsShown) {
+      questionsShown = true;
+      document.getElementById('profile-questions').classList.add('visible');
+    }
+    
+    saveProgress(); // Auto-save when reading a profile
+  }
+
+  // ---- RATINGS ----
+  function setRating(who, val, btn) {
+    ratings[who] = val;
+    const container = document.getElementById('rating-' + who);
+    container.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    saveProgress(); // Auto-save when rating
+  }
+
+  // ---- VALIDATION HELPERS ----
+  function filled(id) {
+    const el = document.getElementById(id);
+    return el && el.value.trim().length > 10;
+  }
+  function showError(id) {
+    const el = document.getElementById(id);
+    el.classList.add('visible');
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => el.classList.remove('visible'), 5000);
+  }
+
+  // ---- PAGE NAVIGATION ----
+  function startInvestigation() {
+    const name = document.getElementById('student-name').value.trim();
+    if (!name) { showError('name-error'); return; }
+    goToPage(1);
+  }
+
+  function nextFromPage1() {
+    if (profilesRead.size < 3 || !filled('q1-common') || !filled('q1-courageous')) {
+      showError('p1-error'); return;
+    }
+    goToPage(2);
+  }
+
+  function nextFromPage2() {
+    if (!filled('q2-source-a') || !filled('q2-source-b') || !filled('q2-source-c') || !filled('q2-technique')) {
+      showError('p2-error'); return;
+    }
+    goToPage(3);
+  }
+
+  function nextFromPage3() {
+    if (!ratings.tarbell || !ratings.riis || !ratings.sinclair || !filled('q3-ratings') || !filled('q3-critical')) {
+      showError('p3-error'); return;
+    }
+    goToPage(4);
+  }
+
+  function nextFromPage4() {
+    const t = document.getElementById('q4-topic').value.trim();
+    const h = document.getElementById('q4-headline').value.trim();
+    if (t.length < 3 || h.length < 5 || !filled('q4-harmed') || !filled('q4-evidence') || !filled('q4-change')) {
+      showError('p4-error'); return;
+    }
+    goToPage(5);
+  }
+
+  function nextFromPage5() {
+    if (!filled('q5-change') || !filled('q5-criticism') || !filled('q5-modern') || !filled('q5-final')) {
+      showError('p5-error'); return;
+    }
+    buildCompletion();
+    goToPage(6);
+  }
+
+  // ---- SANITIZE helper ----
+  function sanitize(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  // ---- COMPLETION ----
+  function buildCompletion() {
+    const name = document.getElementById('student-name').value.trim();
+    document.getElementById('cert-name').textContent = name;
+    document.getElementById('completion-subhead').textContent = name + "'s Investigation Journal · Submitted";
+
+    const headline = sanitize(document.getElementById('q4-headline').value.trim());
+    const topic = sanitize(document.getElementById('q4-topic').value.trim());
+    const finalArg = sanitize(document.getElementById('q5-final').value.trim());
+
+    const ratingLabel = {1:'Minor',2:'Somewhat limited',3:'Moderate',4:'Significant',5:'Transformative'};
+
+    document.getElementById('summary-section').innerHTML = `
+      <div class="fact-box">
+        <div class="fact-item">
+          <span class="fact-label">Your Muckraking Story</span>
+          <p><strong>${topic}</strong></p>
+        </div>
+        <div class="fact-item">
+          <span class="fact-label">Your Headline</span>
+          <p><em>${headline}</em></p>
+        </div>
+        <div class="fact-item">
+          <span class="fact-label">Tarbell's Impact Rating</span>
+          <p>${ratings.tarbell}/5 — ${ratingLabel[ratings.tarbell]}</p>
+        </div>
+        <div class="fact-item">
+          <span class="fact-label">Riis's Impact Rating</span>
+          <p>${ratings.riis}/5 — ${ratingLabel[ratings.riis]}</p>
+        </div>
+        <div class="fact-item">
+          <span class="fact-label">Sinclair's Impact Rating</span>
+          <p>${ratings.sinclair}/5 — ${ratingLabel[ratings.sinclair]}</p>
+        </div>
+        <div class="fact-item" style="grid-column: 1 / -1;">
+          <span class="fact-label">Your Final Argument</span>
+          <p>${finalArg}</p>
+        </div>
+      </div>
+    `;
+  }
+
+  // Initialize UI and load any saved data
+  buildStepNavs();
+  updateProgress(0);
+  loadProgress();
+
+</script>
+</body>
+</html>
