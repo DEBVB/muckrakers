@@ -213,11 +213,60 @@
     .print-only { display: block !important; }
   }
   .print-only { display: none; }
+  /* ---- DAY STAMPS ---- */
+  .day1-stamp { color: var(--gold); border-color: var(--gold); }
+  .day2-stamp { color: var(--green); border-color: var(--green); }
+
+  /* ---- DAY SEPARATOR IN STEP NAV ---- */
+  .step-day-sep {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; padding: 0 4px;
+    font-family: 'Special Elite', cursive; font-size: 9px;
+    letter-spacing: 1px; color: #8a7a60; text-transform: uppercase;
+    line-height: 1.2; gap: 2px;
+  }
+  .step-day-sep::before { content: ''; width: 1px; height: 14px; background: #5a4a30; }
+  .step-day-label { white-space: nowrap; }
+
+  /* ---- DAY HEADER BANNER ---- */
+  .day-banner {
+    background: #1a1208; border: 1px solid #5a4a30;
+    font-family: 'Special Elite', cursive; font-size: 11px;
+    letter-spacing: 3px; text-transform: uppercase;
+    text-align: center; padding: 6px 0; margin-bottom: 20px;
+  }
+  .day-banner.day1 { color: var(--gold); border-color: #7a5c10; }
+  .day-banner.day2 { color: var(--green); border-color: #1e5030; }
+
+
+  /* ---- READING GATE ---- */
+  .gate-btn-wrap { position: relative; display: inline-block; margin-top: 24px; }
+  .gate-overlay {
+    position: absolute; inset: 0;
+    background: rgba(90,70,40,0.55);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Special Elite', cursive;
+    font-size: 12px; letter-spacing: 2px; color: #f5edd8;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  .gate-overlay.unlocked { opacity: 0; pointer-events: none; }
+  .gate-btn-wrap .btn { margin-top: 0; }
+
+  /* ---- TAB-AWAY BANNER ---- */
+  #tab-warning {
+    display: none; position: fixed; top: 8px; left: 50%; transform: translateX(-50%);
+    background: #8a1a08; color: #fff; font-family: 'Special Elite', cursive;
+    font-size: 12px; letter-spacing: 2px; padding: 8px 20px; z-index: 1500;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  #tab-warning.show { display: block; }
 </style>
 </head>
 <body>
 
 <div id="progress-bar"></div>
+<div id="tab-warning">⚠ Tab switch recorded</div>
 
 <!-- TOOLBAR -->
 <div id="toolbar">
@@ -297,7 +346,13 @@
           <p><strong>⚠ REPEAT</strong> — One word used ≥40% of all words in a response. May indicate filler text (e.g. "good good good good").</p>
           <p><strong>⚠ PASTE(n)</strong> — Field was pasted into <em>n</em> times. Not automatically cheating — could be legitimate editing. Review the answer.</p>
           <p><strong>⚠ SPEED</strong> — A writing section completed in under 45 seconds. Student may not have read the source material.</p>
-          <p style="margin-top:8px;color:var(--gray);">Flags are indicators, not verdicts. Always read the actual response before drawing conclusions.</p>
+          <p><strong>⚠ SOURCE-COPY</strong> — Pasted text matches a verbatim 8-word sequence from the provided source excerpts.</p>
+          <p><strong>⚠ DUPLICATE</strong> — This answer shares over 65% word overlap with another answer in the same submission. May indicate copy-paste across fields.</p>
+          <p><strong>⚠ NO-EDIT</strong> — Field was pasted into but fewer than 8 keys were typed. Student may not have written any of the answer themselves.</p>
+          <p><strong>⚠ FAST-TYPE(nwpm)</strong> — Typing speed exceeded 150 WPM in a 15-second window. Near-impossible for manual typing — likely paste without triggering paste event.</p>
+          <p><strong>⚠ IDLE(nm gap)</strong> — A gap of over 2 minutes between keystrokes within a single answer. Student may have stopped to look something up.</p>
+          <p><strong>⚠ TAB-SWITCH</strong> — Student navigated away from this tab. Count and total away-time shown. Does not confirm cheating but warrants attention on longer absences.</p>
+          <p style="margin-top:8px;color:var(--gray);">Note: All flags are indicators, not verdicts. Reading gates on Pages 1 and 2 enforce a minimum 60s and 45s respectively before students can advance. This time is tracked separately from speed flags.</p>
         </div>
       </div>
 
@@ -315,29 +370,30 @@
       <hr class="rule-thick">
       <h1>The Muckrakers</h1>
       <hr class="rule-thin">
-      <div class="subhead">A Self-Guided Investigation into Investigative Journalism, 1890–1910</div>
+      <div class="subhead">A Two-Day Investigation into Investigative Journalism, 1890–1910</div>
     </div>
     <p class="lede">"The man with the muck-rake, the man who could look no way but downward… yet who was so essential to the well-being of society." — President Theodore Roosevelt, 1906</p>
     <div class="two-col">
       <div>
         <h3>Your Mission</h3>
-        <p>You've already learned about the Progressive Era — a time when Americans demanded change. Today you'll dig deeper into the <strong>journalists</strong> who made that change possible: the Muckrakers.</p>
-        <p>Like detectives, muckrakers exposed ugly truths that powerful people wanted hidden. Today you'll do the same kind of thinking.</p>
+        <p>You've already learned about the Progressive Era — a time when Americans demanded change. Over the next two days, you'll dig deeper into the <strong>journalists</strong> who made that change possible: the Muckrakers.</p>
+        <p><strong>Day 1 (today):</strong> Research. You'll study three famous muckrakers, analyze their original sources, and rate their real-world impact.</p>
+        <p><strong>Day 2 (tomorrow):</strong> Create. Using what you learned, you'll plan and write your own muckraking investigation.</p>
       </div>
       <div>
         <h3>How This Works</h3>
         <ul class="checklist">
-          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>Read profiles of 3 famous muckrakers</span></li>
-          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>Analyze real primary source excerpts</span></li>
-          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>Rate the impact of each journalist</span></li>
-          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>Write your own muckraking headline</span></li>
-          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span>Reflect on what changed — and what didn't</span></li>
+          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Day 1:</strong> Read 3 muckraker profiles</span></li>
+          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Day 1:</strong> Analyze real primary sources</span></li>
+          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Day 1:</strong> Rate each journalist's impact</span></li>
+          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Day 2:</strong> Plan your own muckraking story</span></li>
+          <li><div class="check-box" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleCheck(this)" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCheck(this)"></div><span><strong>Day 2:</strong> Reflect and write your final argument</span></li>
         </ul>
       </div>
     </div>
     <div class="callout">
       <strong>🗞️ Before You Begin:</strong>
-      Have you ever seen a news story that exposed something unfair? What happened after it was reported? Hold onto that thought — you'll need it at the end.
+      Have you ever seen a news story that exposed something unfair? What happened after it was reported? Hold onto that thought — your Day 2 assignment will ask you to do exactly that kind of work yourself.
     </div>
     <div class="two-col" style="gap:16px;margin-top:8px;">
       <div>
@@ -361,6 +417,7 @@
   <div style="height:30px"></div>
   <div class="step-nav" id="step-nav-1"></div>
   <div class="paper">
+    <div class="day-banner day1">★ Day 1 — Research &amp; Analysis ★</div>
     <div class="stamp">Case File #1</div>
     <h2>Meet the Muckrakers</h2>
     <p class="lede">Read <em>all three</em> profiles, then answer the questions that appear below.</p>
@@ -450,7 +507,10 @@
       <div class="error-msg" id="p1-error">Please read all 3 profiles and write at least 5 words in each answer.</div>
       <div class="btn-group">
         <button class="btn btn-outline" onclick="goTo(0)">← Back</button>
-        <button class="btn" onclick="page1Next()">Continue to Primary Sources →</button>
+        <div class="gate-btn-wrap" id="gate-wrap-1">
+        <button class="btn" id="gate-btn-1" onclick="page1Next()">Continue to Primary Sources →</button>
+        <div class="gate-overlay" id="gate-overlay-1">Please read the profiles first…</div>
+      </div>
       </div>
     </div>
 
@@ -506,7 +566,10 @@
     <div class="error-msg" id="p2-error">Please answer all four questions with at least 5 words each.</div>
     <div class="btn-group">
       <button class="btn btn-outline" onclick="goTo(1)">← Back</button>
-      <button class="btn" onclick="page2Next()">Continue to Impact Analysis →</button>
+      <div class="gate-btn-wrap" id="gate-wrap-2">
+        <button class="btn" id="gate-btn-2" onclick="page2Next()">Continue to Impact Analysis →</button>
+        <div class="gate-overlay" id="gate-overlay-2">Read the sources first…</div>
+      </div>
     </div>
   </div>
 </div>
@@ -570,17 +633,100 @@
   </div>
 </div>
 
-<!-- PAGE 4: YOUR INVESTIGATION -->
+<!-- PAGE 4: DAY 1 WRAP-UP -->
 <div class="page" id="page-4">
   <div style="height:30px"></div>
   <div class="step-nav" id="step-nav-4"></div>
   <div class="paper">
-    <div class="stamp">Case File #4</div>
+    <div class="stamp day1-stamp">Day 1 Complete</div>
+    <div class="masthead">
+      <div class="overline">End of Day 1 · Progressive Era Unit</div>
+      <hr class="rule-thick">
+      <h1 style="font-size:2rem;">Good Work, Reporter.</h1>
+      <hr class="rule-thin">
+      <div class="subhead">Your notes are saved — see you tomorrow</div>
+    </div>
+
+    <div class="callout green-callout">
+      <strong>📋 What just happened:</strong>
+      Today you researched three of history's most important investigative journalists, analyzed their actual writing, and evaluated their real-world impact. Tomorrow, you'll put that knowledge to work — as a muckraker yourself.
+    </div>
+
+    <div class="divider">Your Day 1 Notes at a Glance</div>
+    <div id="day1-summary-display"></div>
+
+    <div class="divider">Before You Go — One More Question</div>
+    <p style="font-size:0.9rem;color:var(--gray);margin-bottom:0;">Think about the impact ratings you just gave. Don't just describe — analyze.</p>
+    <label for="qd1-bridge">Looking at the three impact ratings you gave, what do they tell you about how social change actually happens? Is journalism enough on its own?</label>
+    <textarea id="qd1-bridge" rows="4" placeholder="My ratings suggest that change happens when… Journalism alone is (enough / not enough) because… For example, Tarbell's impact shows…"></textarea>
+    <div class="wc-row"><span class="wc-badge low" id="wc-qd1-bridge">0 words</span><span class="wc-flag" id="flag-qd1-bridge"></span></div>
+
+    <div class="callout" style="margin-top:24px;">
+      <strong>💾 Your work is automatically saved.</strong>
+      When you return tomorrow, open this same file/link and your notes will be right here waiting. You can also print or copy below as a backup.
+    </div>
+
+    <div class="btn-group no-print">
+      <button class="btn btn-green" style="margin-top:0;" onclick="window.print()">🖨 Print Day 1 Notes</button>
+      <button class="btn btn-outline" style="margin-top:0;" onclick="copyDay1Notes()">📋 Copy Day 1 Notes</button>
+    </div>
+    <div id="d1-copy-confirm" style="display:none;margin-top:8px;font-family:'Special Elite',cursive;font-size:12px;color:var(--green);letter-spacing:1px;">✓ Copied!</div>
+
+    <div class="error-msg" id="p4-error">Please write at least 5 words in your bridge question before wrapping up Day 1.</div>
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="goTo(3)">← Back to Impact</button>
+      <button class="btn" onclick="page4WrapNext()">I'll be back tomorrow →</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 5: DAY 2 KICKOFF -->
+<div class="page" id="page-5">
+  <div style="height:30px"></div>
+  <div class="step-nav" id="step-nav-5"></div>
+  <div class="paper">
+    <div class="day-banner day2">★ Day 2 — Your Investigation ★</div>
+    <div class="stamp day2-stamp">Day 2</div>
+    <div class="masthead">
+      <div class="overline">Day 2 · Your Investigation Begins</div>
+      <hr class="rule-thick">
+      <h1 style="font-size:2rem;">Welcome Back.</h1>
+      <hr class="rule-thin">
+      <div class="subhead">Today you become the muckraker</div>
+    </div>
+
+    <p class="lede">Yesterday you studied three journalists who changed history. Today you'll use what you learned to plan your own investigation into a real problem.</p>
+
+    <div class="divider">Your Day 1 Research — Quick Recap</div>
+    <p style="font-size:0.88rem;color:var(--gray);margin-bottom:12px;">Here's what you recorded yesterday. Use it as your reference as you plan your own story.</p>
+    <div id="day2-recap-display"></div>
+
+    <div class="divider">Before You Begin Day 2</div>
+    <label for="qd2-inspire">Which muckraker's method will most inspire your own investigation — and why? Be specific about the technique you plan to borrow.</label>
+    <textarea id="qd2-inspire" rows="4" placeholder="I'm most inspired by ___ because their method of… I plan to use a similar approach by… specifically when I…"></textarea>
+    <div class="wc-row"><span class="wc-badge low" id="wc-qd2-inspire">0 words</span><span class="wc-flag" id="flag-qd2-inspire"></span></div>
+
+    <div class="error-msg" id="p5-error">Please write at least 5 words about your inspiration before continuing.</div>
+    <div class="btn-group">
+      <div class="gate-btn-wrap" id="gate-wrap-5">
+        <button class="btn" id="gate-btn-5" onclick="page5KickoffNext()">Begin Day 2 Investigation →</button>
+        <div class="gate-overlay" id="gate-overlay-5">Review your notes first…</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 6: YOUR INVESTIGATION (DAY 2) -->
+<div class="page" id="page-6">
+  <div style="height:30px"></div>
+  <div class="step-nav" id="step-nav-6"></div>
+  <div class="paper">
+    <div class="stamp day2-stamp">Day 2 · Case 1</div>
     <h2>Your Muckraking Assignment</h2>
-    <p class="lede">Now it's your turn. Every muckraker started with a problem they wanted to expose. What would <em>you</em> investigate?</p>
+    <p class="lede">Yesterday you studied how Tarbell, Riis, and Sinclair worked. Now it's your turn. Every muckraker started with a problem they burned to expose — what's yours?</p>
     <div class="callout">
       <strong>🖊️ Reporter's Brief</strong>
-      Imagine it's 1905. Your editor at <em>McClure's Magazine</em> has given you an assignment: find a problem in American society, research it, and write a story that will make the public demand change.
+      Imagine it's 1905. Your editor at <em>McClure's Magazine</em> has given you an assignment: find a problem in American society, research it, and write a story that will make the public demand change. Draw on the methods you analyzed yesterday.
     </div>
     <label for="q4-topic">What problem would you investigate? (A real issue — in 1900s America or today)</label>
     <input type="text" id="q4-topic" placeholder="e.g., child labor in factories, unsafe tenement buildings…">
@@ -592,8 +738,8 @@
     <textarea id="q4-harmed" rows="3" placeholder="The people harmed are… The people who benefit from hiding this are…"></textarea>
     <div class="wc-row"><span class="wc-badge low" id="wc-q4-harmed">0 words</span><span class="wc-flag" id="flag-q4-harmed"></span></div>
 
-    <label for="q4-evidence">What evidence would you need? How would you gather it? (Think about how Tarbell, Riis, and Sinclair worked)</label>
-    <textarea id="q4-evidence" rows="4" placeholder="To prove this story, I would need… I could gather this by… like how Sinclair/Tarbell/Riis…"></textarea>
+    <label for="q4-evidence">What evidence would you need? How would you gather it? Reference at least one method you studied yesterday (Tarbell's documents, Riis's photography, or Sinclair's undercover work).</label>
+    <textarea id="q4-evidence" rows="4" placeholder="To prove this story, I would need… Like Tarbell, I could… Or like Sinclair, I might…"></textarea>
     <div class="wc-row"><span class="wc-badge low" id="wc-q4-evidence">0 words</span><span class="wc-flag" id="flag-q4-evidence"></span></div>
 
     <label for="q4-change">What specific change do you hope your story causes?</label>
@@ -602,24 +748,24 @@
 
     <div class="error-msg" id="p4-error">Please complete all fields with at least 5 words each.</div>
     <div class="btn-group">
-      <button class="btn btn-outline" onclick="goTo(3)">← Back</button>
-      <button class="btn" onclick="page4Next()">Continue to Final Reflection →</button>
+      <button class="btn btn-outline" onclick="goTo(5)">← Back</button>
+      <button class="btn" onclick="page6Next()">Continue to Final Reflection →</button>
     </div>
   </div>
 </div>
 
-<!-- PAGE 5: REFLECTION -->
-<div class="page" id="page-5">
+<!-- PAGE 7: REFLECTION (DAY 2) -->
+<div class="page" id="page-7">
   <div style="height:30px"></div>
-  <div class="step-nav" id="step-nav-5"></div>
+  <div class="step-nav" id="step-nav-7"></div>
   <div class="paper">
-    <div class="stamp">Final Report</div>
+    <div class="stamp day2-stamp">Day 2 · Final</div>
     <h2>The Bigger Picture</h2>
-    <p class="lede">You've read, analyzed, rated, and written. Now pull it all together.</p>
-    <div class="divider">Part I — Looking Back</div>
+    <p class="lede">Over two days you researched history's muckrakers and then became one yourself. Now pull it all together.</p>
+    <div class="divider">Part I — Looking Back Across Both Days</div>
 
-    <label for="q5-change">Before today, what did you think about how social change happens? Did this activity change your thinking?</label>
-    <textarea id="q5-change" rows="3" placeholder="Before today, I thought change happened by… Now I think…"></textarea>
+    <label for="q5-change">Before this two-day activity, what did you think about how social change happens? What specifically from Day 1 or Day 2 shifted your thinking?</label>
+    <textarea id="q5-change" rows="3" placeholder="Before this activity, I thought change happened by… Day 1 changed my thinking when… and Day 2 showed me…"></textarea>
     <div class="wc-row"><span class="wc-badge low" id="wc-q5-change">0 words</span><span class="wc-flag" id="flag-q5-change"></span></div>
 
     <label for="q5-criticism">Ida Tarbell faced criticism for attacking "a great man." Jacob Riis was criticized for depicting immigrants as helpless. Upton Sinclair was criticized for writing fiction, not journalism. Choose one: was this criticism fair?</label>
@@ -632,20 +778,20 @@
     <textarea id="q5-modern" rows="3" placeholder="Someone doing similar work today is ___ because they…"></textarea>
     <div class="wc-row"><span class="wc-badge low" id="wc-q5-modern">0 words</span><span class="wc-flag" id="flag-q5-modern"></span></div>
 
-    <label for="q5-final">🏁 Final Argument: In one paragraph, answer — <em>Why does muckraking matter?</em> Use at least TWO specific examples from today's activity.</label>
-    <textarea id="q5-final" rows="5" placeholder="Muckraking matters because… For example, Ida Tarbell's investigation showed… Similarly, Upton Sinclair demonstrated… Without this kind of journalism…"></textarea>
+    <label for="q5-final">🏁 Final Argument: In one paragraph, answer — <em>Why does muckraking matter?</em> Use at least TWO specific examples from your two days of work — one from the historical muckrakers and one from your own investigation plan.</label>
+    <textarea id="q5-final" rows="5" placeholder="Muckraking matters because… For example, Ida Tarbell's investigation showed… My own investigation into ___ demonstrates the same principle because…"></textarea>
     <div class="wc-row"><span class="wc-badge low" id="wc-q5-final">0 words</span><span class="wc-flag" id="flag-q5-final"></span></div>
 
     <div class="error-msg" id="p5-error">Please answer all four questions with at least 5 words each.</div>
     <div class="btn-group">
-      <button class="btn btn-outline" onclick="goTo(4)">← Back</button>
-      <button class="btn" onclick="page5Next()">Submit Investigation →</button>
+      <button class="btn btn-outline" onclick="goTo(6)">← Back</button>
+      <button class="btn" onclick="page7Next()">Submit Investigation →</button>
     </div>
   </div>
 </div>
 
-<!-- PAGE 6: COMPLETION -->
-<div class="page" id="page-6">
+<!-- PAGE 8: COMPLETION -->
+<div class="page" id="page-8">
   <div style="height:30px"></div>
   <div class="paper">
     <div class="masthead">
@@ -661,7 +807,7 @@
       <p style="font-family:'Special Elite',cursive;font-size:1rem;color:var(--gray);margin:12px 0;">This certifies that</p>
       <p id="cert-name" style="font-family:'Playfair Display',serif;font-size:1.8rem;font-style:italic;color:var(--rust);">Student</p>
       <p style="font-family:'Special Elite',cursive;font-size:1rem;color:var(--gray);margin:8px 0;">has completed the</p>
-      <p style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;">Muckrakers Investigation · Progressive Era Unit</p>
+      <p style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;">Muckrakers Investigation · Two-Day Progressive Era Unit</p>
       <p id="cert-meta" style="font-family:'Special Elite',cursive;font-size:0.85rem;color:var(--gray);margin-top:10px;"></p>
     </div>
 
@@ -704,7 +850,7 @@ const REPEAT_RATIO = 0.40;        // Single-word frequency threshold
 
 // ─── STATE ──────────────────────────────────────────────────────────
 let curPage     = 0;
-const TOTAL     = 7;
+const TOTAL     = 9;
 const ratings   = { tarbell:0, riis:0, sinclair:0 };
 let profilesRead = new Set();
 let qShown      = false;
@@ -715,6 +861,8 @@ const FIELDS = [
   'q1-common','q1-courageous',
   'q2-source-a','q2-source-b','q2-source-c','q2-technique',
   'q3-ratings','q3-critical',
+  'qd1-bridge',
+  'qd2-inspire',
   'q4-topic','q4-headline','q4-harmed','q4-evidence','q4-change',
   'q5-change','q5-criticism','q5-modern','q5-final'
 ];
@@ -724,14 +872,47 @@ const pageEnter   = {};
 const pageSeconds = {};
 const flags       = {};
 
+// ─── EXTENDED ANTI-CHEAT STATE ───────────────────────────────────────
+let   tabSwitches    = 0;           // times student switched away
+let   tabAwayTotal   = 0;           // total seconds away from tab
+let   tabAwayStart   = null;
+const keystrokeCount = {};          // { fieldId: n } — actual keypresses
+const fieldFocused   = {};          // { fieldId: bool }
+const lastKeyTime    = {};          // { fieldId: ms } — for idle gap
+const idleGapMax     = {};          // { fieldId: seconds } — longest gap
+const typingSnaps    = {};          // { fieldId: [{t,len}] } — for speed
+const sourceCopyFlag = {};          // { fieldId: bool }
+const dupeFlagMap    = {};          // { fieldId: bool }
+
+// Source text n-grams (8-word chunks, normalised) for verbatim detection
+const SOURCE_NGRAMS = (function() {
+  const texts = [
+    "there was never the least attention paid to what was cut up for sausage there would be meat that had tumbled out on the floor in the dirt and sawdust where the workers had tramped and spit uncounted billions of consumption germs there would be meat stored in great piles in rooms and the water from leaky roofs would drip over it and thousands of rats would race about on it",
+    "mr rockefeller was more troubled by a competitor who made cheaper oil than by one who made better oil it was not enough that standard oil got rebates special lower shipping rates from the railroads it also demanded that the railroads pay it a portion of what competitors paid for shipping the competitor was not only deprived of his equal rights but his payments went to build up the very power that was destroying him",
+    "in a room not thirteen feet either way slept twelve men and women two or three in bunks set in a sort of alcove the rest on the floor a kerosene lamp burned dimly in the fearful atmosphere probably to guide other and later arrivals to their beds for it was only just past midnight a babys faint wail came from an adjoining hall room"
+  ];
+  const ngrams = new Set();
+  texts.forEach(t => {
+    const words = t.split(' ');
+    for (let i = 0; i <= words.length - 8; i++) {
+      ngrams.add(words.slice(i, i+8).join(' '));
+    }
+  });
+  return ngrams;
+})();
+
+// Reading gates: page -> { minSec, unlocked, timer }
+const READ_GATES = { 1: { minSec:60, unlocked:false }, 2: { minSec:45, unlocked:false }, 5: { minSec:20, unlocked:false } };
+
 // ─── NAVIGATION LABELS (must be before IIFE) ─────────────────────────
-const STEP_LABELS = ['Intro','Profiles','Sources','Impact','Your Story','Reflect','Done'];
+const STEP_LABELS = ['Intro','Profiles','Sources','Impact','Day 1 Done','Day 2 Start','Investigate','Reflect','Done'];
 
 // ─── BOOT ────────────────────────────────────────────────────────────
 (function init() {
   buildNavs();
   setProgress(0);
   attachAntiCheat();
+  attachTabWatcher();
   restoreSession();
   pageEnter[0] = Date.now();
 })();
@@ -751,6 +932,14 @@ function buildNavs() {
     if (!nav) continue;
     nav.innerHTML = '';
     for (let i = 0; i < TOTAL; i++) {
+      // Insert day separator between step 4 (Day 1 Done) and step 5 (Day 2 Start)
+      if (i === 5) {
+        const sep = document.createElement('div');
+        sep.className = 'step-day-sep';
+        sep.innerHTML = '<span class="step-day-label">Day 2</span>';
+        sep.title = 'Day 2 begins here';
+        nav.appendChild(sep);
+      }
       const d = document.createElement('div');
       d.className = 'step-dot' + (i===p?' active':(i<p?' done':''));
       d.textContent = i < p ? '✓' : (i+1);
@@ -779,6 +968,41 @@ function goTo(n) {
   window.scrollTo(0, 0);
   setProgress(n);
   saveSession();
+  startReadGate(n);
+  // Run duplicate scan on every forward transition
+  if (n > 1) setTimeout(runDuplicateScan, 200);
+}
+
+// ─── READING GATE ─────────────────────────────────────────────────────
+function startReadGate(pageNum) {
+  if (!READ_GATES[pageNum]) return;
+  const gate = READ_GATES[pageNum];
+  if (gate.unlocked) return;
+
+  const overlay = document.getElementById('gate-overlay-'+pageNum);
+  const btn     = document.getElementById('gate-btn-'+pageNum);
+  if (!overlay || !btn) return;
+
+  btn.disabled = true;
+  btn.style.opacity = '0.5';
+  btn.style.cursor  = 'not-allowed';
+
+  let remaining = gate.minSec;
+  overlay.textContent = 'Available in ' + remaining + 's…';
+
+  const ticker = setInterval(() => {
+    remaining--;
+    if (remaining <= 0) {
+      clearInterval(ticker);
+      gate.unlocked = true;
+      btn.disabled = false;
+      btn.style.opacity = '';
+      btn.style.cursor  = '';
+      overlay.classList.add('unlocked');
+    } else {
+      overlay.textContent = 'Available in ' + remaining + 's…';
+    }
+  }, 1000);
 }
 
 // ─── CHECKLIST ───────────────────────────────────────────────────────
@@ -820,18 +1044,18 @@ function wc(text) {
   return text.trim().split(/\s+/).filter(w=>w.length>0).length;
 }
 
-function analyzeText(text) {
+function analyzeText(text, id) {
   const result = [];
   const t = text.trim();
   if (t.length < 5) return result;
 
-  // Mash: unique chars / total chars
+  // AC2: Mash — unique chars / total chars
   const noSpace = t.replace(/\s/g,'');
   if (noSpace.length > 8 && new Set(noSpace).size / noSpace.length < MASH_RATIO) {
     result.push('⚠ MASH');
   }
 
-  // Repeat: single word dominates
+  // AC3: Repeat — single word dominates
   const words = t.toLowerCase().split(/\s+/).filter(w=>w.length>1);
   if (words.length >= 5) {
     const freq = {};
@@ -839,7 +1063,71 @@ function analyzeText(text) {
     const top = Object.values(freq).sort((a,b)=>b-a)[0];
     if (top/words.length > REPEAT_RATIO) result.push('⚠ REPEAT');
   }
+
+  if (!id) return result;
+
+  // AC7: Source verbatim copy
+  if (sourceCopyFlag[id]) result.push('⚠ SOURCE-COPY');
+
+  // AC8: Cross-answer duplicate (checked separately, read from map)
+  if (dupeFlagMap[id]) result.push('⚠ DUPLICATE');
+
+  // AC9: Zero-keyboard — pasted but barely typed
+  if ((pasteCount[id]||0) > 0 && (keystrokeCount[id]||0) < 8 && t.length > 30) {
+    result.push('⚠ NO-EDIT');
+  }
+
+  // AC10: Typing speed anomaly — more than 150 WPM in any 15-second window
+  const snaps = typingSnaps[id] || [];
+  if (snaps.length >= 2) {
+    for (let i = 0; i < snaps.length - 1; i++) {
+      for (let j = i + 1; j < snaps.length; j++) {
+        const dtSec = (snaps[j].t - snaps[i].t) / 1000;
+        if (dtSec >= 5 && dtSec <= 15) {
+          const charsAdded = snaps[j].len - snaps[i].len;
+          const wpm = (charsAdded / 5) / (dtSec / 60); // avg 5 chars/word
+          if (wpm > 150) { result.push('⚠ FAST-TYPE(' + Math.round(wpm) + 'wpm)'); break; }
+        }
+      }
+      if (result.some(r=>r.includes('FAST-TYPE'))) break;
+    }
+  }
+
+  // Idle gap > 2 min mid-answer
+  if ((idleGapMax[id]||0) > 120) {
+    result.push('⚠ IDLE(' + Math.round(idleGapMax[id]/60) + 'm gap)');
+  }
+
   return result;
+}
+
+// ─── CROSS-ANSWER DUPLICATE SCAN ─────────────────────────────────────
+// Run on every page transition — compares all textarea answers pairwise
+function runDuplicateScan() {
+  const txFields = FIELDS.filter(id => {
+    const el = document.getElementById(id);
+    return el && el.tagName === 'TEXTAREA';
+  });
+  // Reset
+  txFields.forEach(id => dupeFlagMap[id] = false);
+
+  for (let i = 0; i < txFields.length; i++) {
+    for (let j = i+1; j < txFields.length; j++) {
+      const a = gv(txFields[i]);
+      const b = gv(txFields[j]);
+      if (a.length < 25 || b.length < 25) continue;
+      const wA = new Set(a.toLowerCase().split(/\s+/).filter(w=>w.length>3));
+      const wB = new Set(b.toLowerCase().split(/\s+/).filter(w=>w.length>3));
+      const inter = [...wA].filter(w=>wB.has(w)).length;
+      const union = new Set([...wA,...wB]).size;
+      if (union > 0 && inter/union > 0.65) {
+        dupeFlagMap[txFields[i]] = true;
+        dupeFlagMap[txFields[j]] = true;
+      }
+    }
+  }
+  // Refresh flags for any newly flagged fields
+  txFields.forEach(id => { if (dupeFlagMap[id]) refreshWC(id); });
 }
 
 function refreshWC(id) {
@@ -853,7 +1141,7 @@ function refreshWC(id) {
   badge.textContent = count + (count===1?' word':' words');
   badge.className   = 'wc-badge ' + (count >= MIN_WORDS ? 'ok' : 'low');
 
-  const textFlags  = analyzeText(el.value);
+  const textFlags  = analyzeText(el.value, id);
   const pasteFlags = (pasteCount[id]||0) > 0 ? ['⚠ PASTE('+pasteCount[id]+')'] : [];
   flags[id]        = [...textFlags, ...pasteFlags];
   if (flagEl) flagEl.textContent = flags[id].join('  ');
@@ -863,15 +1151,71 @@ function refreshWC(id) {
 
 function attachAntiCheat() {
   FIELDS.forEach(id => {
-    pasteCount[id] = 0;
-    flags[id]      = [];
+    pasteCount[id]    = 0;
+    keystrokeCount[id]= 0;
+    fieldFocused[id]  = false;
+    idleGapMax[id]    = 0;
+    typingSnaps[id]   = [];
+    sourceCopyFlag[id]= false;
+    dupeFlagMap[id]   = false;
+    flags[id]         = [];
+
     const el = document.getElementById(id);
     if (!el) return;
-    el.addEventListener('input', () => refreshWC(id));
-    el.addEventListener('paste', () => {
-      pasteCount[id] = (pasteCount[id]||0) + 1;
-      setTimeout(() => refreshWC(id), 80);
+
+    el.addEventListener('focus', () => { fieldFocused[id] = true; });
+
+    el.addEventListener('keypress', () => {
+      keystrokeCount[id]++;
+      const now = Date.now();
+      if (lastKeyTime[id]) {
+        const gap = (now - lastKeyTime[id]) / 1000;
+        if (gap > 120) idleGapMax[id] = Math.max(idleGapMax[id], gap); // 2-min idle gap
+      }
+      lastKeyTime[id] = now;
     });
+
+    el.addEventListener('input', () => {
+      // Typing speed snapshot
+      if (!typingSnaps[id]) typingSnaps[id] = [];
+      typingSnaps[id].push({ t: Date.now(), len: el.value.length });
+      // Trim to last 60 snapshots
+      if (typingSnaps[id].length > 60) typingSnaps[id].shift();
+      refreshWC(id);
+    });
+
+    el.addEventListener('paste', () => {
+      pasteCount[id]++;
+      setTimeout(() => {
+        // Source verbatim check
+        const norm = el.value.toLowerCase().replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,' ').trim();
+        const words = norm.split(' ');
+        for (let i = 0; i <= words.length - 8; i++) {
+          if (SOURCE_NGRAMS.has(words.slice(i,i+8).join(' '))) {
+            sourceCopyFlag[id] = true;
+            break;
+          }
+        }
+        refreshWC(id);
+      }, 80);
+    });
+  });
+}
+
+// ─── TAB WATCHER ──────────────────────────────────────────────────────
+function attachTabWatcher() {
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      tabSwitches++;
+      tabAwayStart = Date.now();
+      const warn = document.getElementById('tab-warning');
+      warn.textContent = '⚠ Tab switch #' + tabSwitches + ' recorded';
+      warn.classList.add('show');
+      setTimeout(() => warn.classList.remove('show'), 3000);
+    } else if (tabAwayStart) {
+      tabAwayTotal += (Date.now() - tabAwayStart) / 1000;
+      tabAwayStart = null;
+    }
   });
 }
 
@@ -914,18 +1258,18 @@ function page3Next() {
   goTo(4);
 }
 
-function page4Next() {
+function page6Next() {
   const t = document.getElementById('q4-topic').value.trim();
   const h = document.getElementById('q4-headline').value.trim();
   if (t.length<3||h.length<5||!enough('q4-harmed')||!enough('q4-evidence')||!enough('q4-change')) { showErr('p4-error'); return; }
-  goTo(5);
+  goTo(7);
 }
 
-function page5Next() {
+function page7Next() {
   if (!enough('q5-change')||!enough('q5-criticism')||!enough('q5-modern')||!enough('q5-final')) { showErr('p5-error'); return; }
   buildCompletion();
   try { localStorage.removeItem('muck_v2'); } catch(e) {}
-  goTo(6);
+  goTo(8);
 }
 
 // ─── SANITIZE ────────────────────────────────────────────────────────
@@ -1001,9 +1345,11 @@ const CODE_FIELD_LIMIT = 300;
 
 function makeCode() {
   const data = {
-    v:2, n:gv('student-name'), p:gv('class-period'),
+    v:3, n:gv('student-name'), p:gv('class-period'),
     ts:new Date().toISOString(), r:ratings, f:{}, wc:{},
-    fl:{}, paste:{}, time:{}, speed:{}
+    fl:{}, paste:{}, time:{}, speed:{},
+    tabs: tabSwitches, away: Math.round(tabAwayTotal),
+    ks:{}, idle:{}
   };
   FIELDS.forEach(id => {
     const full = gv(id);
@@ -1111,17 +1457,27 @@ function refreshLive() {
   const body = document.getElementById('t-live-body');
   if (!name) { body.innerHTML='<p style="color:var(--gray);font-style:italic;">No session yet.</p>'; return; }
 
+  // Run a fresh dupe scan before displaying
+  runDuplicateScan();
+  FIELDS.forEach(id => refreshWC(id));
+
   // All flags
   const allFlags = [];
   FIELDS.forEach(id => (flags[id]||[]).forEach(f => allFlags.push(id+': '+f)));
   for(let i=1;i<=5;i++) if(speedFlag(i)) allFlags.push('Page '+i+': ⚠ SPEED ('+Math.round(pageSeconds[i]||0)+'s)');
+  if (tabSwitches > 0) allFlags.push('⚠ TAB-SWITCH x'+tabSwitches+' ('+Math.round(tabAwayTotal)+'s away)');
 
   let html = '<div class="flag-list">';
   if (!allFlags.length) html += '<span class="flag ok">✓ No flags raised</span>';
   else allFlags.forEach(f => {
-    const cls = f.includes('SPEED')||f.includes('PASTE') ? 'warn' : 'bad';
+    const cls = (f.includes('PASTE')||f.includes('TAB')||f.includes('IDLE')||f.includes('SPEED')) ? 'warn' : 'bad';
     html += '<span class="flag '+cls+'">'+esc(f)+'</span>';
   });
+  html += '</div>';
+
+  // Tab summary
+  html += '<div style="font-family:Special Elite,cursive;font-size:11px;letter-spacing:1px;color:var(--gray);margin:8px 0;">';
+  html += 'Tab switches: <strong>'+ tabSwitches +'</strong> &nbsp;|&nbsp; Total away: <strong>'+ fmtTime(Math.round(tabAwayTotal)) +'</strong>';
   html += '</div>';
 
   // Times
@@ -1174,6 +1530,9 @@ function tDecode() {
     if(d.paste&&d.paste[id]>0) allFlags.push(id+': ⚠ PASTE('+d.paste[id]+')');
   });
   if(d.speed) Object.keys(d.speed).forEach(pg=>{ if(d.speed[pg]) allFlags.push('Page '+pg+': ⚠ SPEED ('+(d.time&&d.time[pg]||'?')+'s)'); });
+  if(d.tabs > 0) allFlags.push('⚠ TAB-SWITCH x'+d.tabs+' ('+(d.away||0)+'s away)');
+  if(d.ks) FIELDS.forEach(id=>{ if((d.paste&&d.paste[id]>0)&&(d.ks[id]||0)<8&&(d.f&&d.f[id]||'').length>30) allFlags.push(id+': ⚠ NO-EDIT'); });
+  if(d.idle) FIELDS.forEach(id=>{ if((d.idle[id]||0)>120) allFlags.push(id+': ⚠ IDLE('+Math.round(d.idle[id]/60)+'m gap)'); });
 
   let html = `<div style="margin-top:12px;border:1px solid var(--light-gray);padding:14px;">
   <div style="font-family:'Special Elite',cursive;font-size:11px;letter-spacing:2px;color:var(--rust);text-transform:uppercase;margin-bottom:10px;">
@@ -1186,7 +1545,8 @@ function tDecode() {
     html+='<span class="flag '+cls+'">'+esc(f)+'</span>';
   });
   html+='</div>';
-  if(d.r) html+=`<p style="font-size:0.88rem;margin-bottom:10px;">Tarbell: ${d.r.tarbell}/5 &nbsp;|&nbsp; Riis: ${d.r.riis}/5 &nbsp;|&nbsp; Sinclair: ${d.r.sinclair}/5</p>`;
+  if(d.r) html+=`<p style="font-size:0.88rem;margin-bottom:6px;">Tarbell: ${d.r.tarbell}/5 &nbsp;|&nbsp; Riis: ${d.r.riis}/5 &nbsp;|&nbsp; Sinclair: ${d.r.sinclair}/5</p>`;
+  if(d.tabs!==undefined) html+=`<p style="font-family:'Special Elite',cursive;font-size:11px;letter-spacing:1px;color:var(--gray);margin-bottom:10px;">Tab switches: <strong>${d.tabs}</strong> &nbsp;|&nbsp; Away: <strong>${fmtTime(d.away||0)}</strong></p>`;
 
   const qs=[
     ['Similarities','q1-common'],['Most Courageous','q1-courageous'],
